@@ -1,125 +1,54 @@
 import { useState } from "react";
-import { Box } from "@mui/material";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  styled,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
 
 const BottomNav = () => {
-  const [active, setActive] = useState(false);
+  const [value, setValue] = useState(0);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <>
-      <BottomNavigation
-        component="nav"
-        sx={{
-          position: "sticky",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          height: 60,
-          zIndex: 100,
-          boxShadow: 0,
-          bgcolor: "neutral.light",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
+      {matches ? null : (
+        <BottomNavigation
+          sx={{ position: "sticky", bottom: 0, width: 1 }}
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
           }}
+          showLabels
         >
-          <Box
-            sx={{
-              paddingBottom: 2,
-              borderBottom: active ? 4 : 0,
-              borderColor: "primary.main",
-            }}
-          >
-            <BottomNavigationAction
-              sx={{ width: "30px", height: "30px", padding: 0 }}
-              aria-label="home"
-              icon={
-                <HomeIcon
-                  sx={{
-                    width: 1,
-                    height: 1,
-                    color: active ? "primary.main" : "default",
-                  }}
-                />
-              }
-            />
-          </Box>
-          <Box
-            sx={{
-              paddingBottom: 2,
-              borderBottom: active ? 4 : 0,
-              borderColor: "primary.main",
-            }}
-          >
-            <BottomNavigationAction
-              sx={{ width: "30px", height: "30px", padding: 0 }}
-              aria-label="home"
-              icon={
-                <SearchIcon
-                  sx={{
-                    width: 1,
-                    height: 1,
-                    color: active ? "primary.main" : "default",
-                  }}
-                />
-              }
-            />
-          </Box>
-
-          <Box
-            sx={{
-              paddingBottom: 2,
-              borderBottom: active ? 4 : 0,
-              borderColor: "primary.main",
-            }}
-          >
-            <BottomNavigationAction
-              sx={{ width: "30px", height: "30px", padding: 0 }}
-              aria-label="home"
-              icon={
-                <FavoriteIcon
-                  sx={{
-                    width: 1,
-                    height: 1,
-                    color: active ? "primary.main" : "default",
-                  }}
-                />
-              }
-            />
-          </Box>
-
-          <Box
-            sx={{
-              paddingBottom: 2,
-              borderBottom: active ? 4 : 0,
-              borderColor: "primary.main",
-            }}
-          >
-            <BottomNavigationAction
-              sx={{ width: "30px", height: "30px", padding: 0 }}
-              aria-label="home"
-              icon={
-                <PersonIcon
-                  sx={{
-                    width: 1,
-                    height: 1,
-                    color: active ? "primary.main" : "default",
-                  }}
-                />
-              }
-            />
-          </Box>
-        </Box>
-      </BottomNavigation>
+          <BottomNavigationAction
+            aria-label="Home"
+            label="Home"
+            icon={<HomeIcon />}
+          />
+          <BottomNavigationAction
+            aria-label="Search"
+            label="Search"
+            icon={<SearchIcon />}
+          />
+          <BottomNavigationAction
+            aria-label="Favorites"
+            label="Favorites"
+            icon={<FavoriteIcon />}
+          />
+          <BottomNavigationAction
+            aria-label="Profile"
+            label="Profile"
+            icon={<PersonIcon />}
+          />
+        </BottomNavigation>
+      )}
     </>
   );
 };

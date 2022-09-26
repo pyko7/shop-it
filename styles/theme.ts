@@ -19,7 +19,7 @@ export const theme = createTheme({
     },
     neutral: {
       light: "#fff",
-      main: "#ccc",
+      main: "#ddd",
       dark: "#000",
     },
   },
