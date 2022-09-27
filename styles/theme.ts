@@ -23,6 +23,15 @@ export const theme = createTheme({
       dark: "#000",
     },
   },
+  components: {
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+  },
 });
 
 declare module "@mui/material/styles" {

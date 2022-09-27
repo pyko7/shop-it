@@ -1,11 +1,9 @@
-import {
-  AppBar,
-  Box,
-  Typography,
-  IconButton,
-  styled,
-  InputBase,
-} from "@mui/material";
+import { styled } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";

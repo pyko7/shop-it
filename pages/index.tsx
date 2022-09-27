@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import NewItemCard from "../components/Cards/NewItemCard";
+import NewArrivalList from "../components/Lists/NewArrivalList";
 
 const Home: NextPage = () => {
   const theme = useTheme();
@@ -14,8 +15,7 @@ const Home: NextPage = () => {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        paddingY: 2,
-        paddingX: 3,
+        padding: 2.5,
         marginTop: matches ? 6 : null,
       }}
     >
@@ -30,7 +30,9 @@ const Home: NextPage = () => {
         <Typography variant="h1" sx={{ fontSize: 24, fontWeight: "bold" }}>
           New Arrival
         </Typography>
-        <NewItemCard />
+        <Box sx={{ width: "100%" }}>
+          <NewArrivalList />
+        </Box>
       </Box>
     </Box>
   );

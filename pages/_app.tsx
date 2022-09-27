@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import type { AppProps } from "next/app";
 import type { AppProps as NextAppProps } from "next/app";
 import {
   Hydrate,
@@ -7,7 +6,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../styles/theme";
 import Layout from "../components/Layout";
 
@@ -18,7 +17,16 @@ type AppProps<P = any> = {
 } & Omit<NextAppProps<P>, "pageProps">;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
 
   return (
     <QueryClientProvider client={queryClient}>

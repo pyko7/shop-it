@@ -1,9 +1,6 @@
 import { useState } from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  styled,
-} from "@mui/material";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import BottomNavigation from "@mui/material/BottomNavigation";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import HomeIcon from "@mui/icons-material/Home";
