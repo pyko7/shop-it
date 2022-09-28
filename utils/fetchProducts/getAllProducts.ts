@@ -11,7 +11,7 @@ export type Product = {
   title: string;
 };
 
-type ProductList = {
+export type ProductList = {
   limit: number;
   products: Array<Product>;
   skip: number;
