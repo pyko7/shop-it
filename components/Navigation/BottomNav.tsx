@@ -11,7 +11,7 @@ import PersonIcon from "@mui/icons-material/Person";
 const BottomNav = () => {
   const [value, setValue] = useState(0);
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <>

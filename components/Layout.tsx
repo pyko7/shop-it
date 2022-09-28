@@ -29,13 +29,13 @@ const Layout = ({ children }: { children?: ReactNode }) => {
         sx={{
           position: "relative",
           width: "100%",
-          minHeight: "100vh",
         }}
       >
         <Box
           component="main"
           sx={{
             width: "100%",
+            minHeight: "100vh",
             maxWidth: 1920,
             marginY: 0,
             marginX: "auto",

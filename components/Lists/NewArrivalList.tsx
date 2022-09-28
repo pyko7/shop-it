@@ -1,14 +1,16 @@
 import { FC } from "react";
+import { styled } from "@mui/system";
 import Grid from "@mui/material/Grid";
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import {
   getAllProducts,
   Product,
 } from "../../utils/fetchProducts/getAllProducts";
 import NewArrivalItem from "../Cards/NewArrivalItem";
+import useAllProductsData from "../../hooks/useAllProductsData";
+import { getRandomProducts } from "../../utils/products/getRandomProducts";
 
 export async function getStaticProps() {
-  const id: number = 1;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["allProducts"], () => getAllProducts());
   return {
@@ -19,22 +21,20 @@ export async function getStaticProps() {
 }
 
 const NewArrivalList: FC = (): JSX.Element => {
-  const { isLoading, error, data } = useQuery(["allProducts"], () =>
-    getAllProducts()
-  );
-  let randomProductArray: Product[] = [];
+  const { isLoading, error, data } = useAllProductsData();
+  let randomProducts: Product[] = [];
 
-  /*ADD STATEMENT TO AVOID 2 SIMILAR ITEMS IN GRID*/
-  const getRandomProducts = (): Product[] => {
-    for (let i = 0; i < 4; i++) {
-      let randomProduct =
-        data?.products[Math.floor(Math.random() * data?.products.length)];
-      randomProductArray.push(randomProduct!);
-    }
-    return randomProductArray;
-  };
+  if (data !== undefined) {
+    getRandomProducts(data, 4, randomProducts);
+  }
 
-  getRandomProducts();
+  const ProductsGrid = styled(Grid)(({ theme }) => ({
+    padding: 0,
+    [theme.breakpoints.up("md")]: {
+      flexWrap: "nowrap",
+    },
+  }));
+
   return (
     <>
       {isLoading ? (
@@ -42,13 +42,17 @@ const NewArrivalList: FC = (): JSX.Element => {
       ) : error ? (
         <h1>Error</h1>
       ) : (
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {randomProductArray.map((product) => (
-            <Grid item xs={6}>
-              <NewArrivalItem product={product} key={product.id} />
+        <ProductsGrid
+          container
+          rowSpacing={1.5}
+          columnSpacing={{ xs: 1, md: 3, xl: 1 }}
+        >
+          {randomProducts.map((product) => (
+            <Grid item xs={6} xl={2} key={product.id}>
+              <NewArrivalItem product={product} />
             </Grid>
           ))}
-        </Grid>
+        </ProductsGrid>
       )}
     </>
   );

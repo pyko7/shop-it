@@ -12,7 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -27,20 +27,20 @@ const Header = () => {
     backgroundColor: theme.palette.neutral?.main,
   }));
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
+  const SearchIconWrapper = styled("div")({
     width: "fit-content",
     height: "100%",
     display: "flex",
     alignItems: "center",
-  }));
+  });
 
-  const SearchInput = styled(InputBase)(({ theme }) => ({
+  const SearchInput = styled(InputBase)({
     width: "100%",
     height: "100%",
     paddingLeft: "6px",
     borderTopRightRadius: "4px",
     borderBottomRightRadius: "4px",
-  }));
+  });
 
   return (
     <Box
