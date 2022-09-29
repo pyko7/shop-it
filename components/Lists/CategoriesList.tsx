@@ -1,20 +1,25 @@
-import { FC } from "react";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { FC, useState } from "react";
+import { StateProps } from "../../context/CategoryContext";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import useAllProductsData from "../../hooks/useAllProductsData";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
-import Link from "next/link";
 
-const CategoriesList: FC = (): JSX.Element => {
+const CategoriesList: FC<StateProps> = ({
+  category,
+  setCategory,
+}): JSX.Element => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   const { isLoading, error, data } = useAllProductsData();
-  const theme = useTheme();
-  const isDesktopScreen = useMediaQuery(theme.breakpoints.up("xl"));
-  let categories: string[] = [];
-
-  data?.products.forEach((product: Product) => {
+  console.log(data);
+  let categories: string[] = ["all"];
+  data?.forEach((product: Product) => {
     if (categories.includes(product.category)) {
       categories.filter((category) => category === product.category);
     } else {
@@ -33,47 +38,34 @@ const CategoriesList: FC = (): JSX.Element => {
         <Box
           sx={{
             width: 1,
-            paddingLeft: 1.5,
-            paddingRight: 0.25,
-            bgcolor: "primary.dark",
+            bgcolor: "primary.main",
           }}
         >
-          <Grid
-            container
-            wrap="nowrap"
-            sx={{
-              width: 1,
-              overflowX: isDesktopScreen ? "hidden" : "scroll",
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="categories"
+            TabIndicatorProps={{
+              sx: { backgroundColor: "neutral.dark" },
             }}
-            columnSpacing={2.5}
+            sx={{
+              "& .MuiTab-root.Mui-selected": {
+                color: "neutral.dark",
+              },
+            }}
           >
-            {categories.map((category) => (
-              <Grid item key={category} sx={{}}>
-                <Link href="#">
-                  <a
-                    style={{
-                      width: "fit-content",
-                      height: "100%",
-                      padding: "3.5px 0",
-                      color: "inherit",
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: "neutral.main",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {category}
-                    </Typography>
-                  </a>
-                </Link>
-              </Grid>
+            {categories.map((cat) => (
+              <Tab
+                onClick={() => setCategory(cat)}
+                label={cat}
+                wrapped
+                sx={{ color: "neutral.dark" }}
+                key={cat}
+              />
             ))}
-          </Grid>
+          </Tabs>
         </Box>
       )}
     </>

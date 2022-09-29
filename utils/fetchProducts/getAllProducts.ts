@@ -11,20 +11,15 @@ export type Product = {
   title: string;
 };
 
-export type ProductList = {
-  limit: number;
-  products: Array<Product>;
-  skip: number;
-  total: number;
-};
-
-export const getAllProducts = async (): Promise<ProductList> => {
+export const getAllProducts = async (): Promise<Product[]> => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/products?limit=100`
   );
+  const data = await res.json();
   if (!res.ok) {
     const message = `An error has occured: ${res.status}`;
     throw new Error(message);
   }
-  return (await res.json()) as Promise<ProductList>;
+  console.log(data.products);
+  return data.products as Promise<Product[]>;
 };

@@ -1,15 +1,14 @@
 import { FC, useState } from "react";
 import Image from "next/image";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-import Grow from "@mui/material/Grow";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import Grow from "@mui/material/Grow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
@@ -17,7 +16,7 @@ interface ProductProps {
   product: Product;
 }
 
-const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
+const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
   const [isLiked, setIsLiked] = useState(false);
   const [animation, setAnimation] = useState(false);
 
@@ -31,39 +30,13 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
     }
   };
 
-  const CardDescriptionContainer = styled("div")(({ theme }) => ({
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    width: "100%",
-    height: "50px",
-    padding: "0 10px 0 10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    gap: 4,
-    color: theme.palette.neutral?.light,
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
-  }));
-
-  const CardTitle = styled(Typography)({
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
-    WebkitLineClamp: "1",
-    WebkitBoxOrient: "vertical",
-    fontSize: 12,
-    fontWeight: 500,
-  });
-
   return (
     <Card
       sx={{
         position: "relative",
         width: 1,
         maxWidth: 280,
-        height: 170,
+        height: 255,
       }}
     >
       <CardActionArea
@@ -76,9 +49,11 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
           sx={{
             width: "100%",
             height: "100%",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          <Box sx={{ position: "relative", width: 1, height: 1 }}>
+          <Box sx={{ position: "relative", width: 1, height: "60%" }}>
             <Image
               src={product?.thumbnail!}
               alt={product?.title}
@@ -87,9 +62,14 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
               objectPosition="50% 50%"
             />
           </Box>
-          <CardDescriptionContainer>
-            <CardTitle variant="h3">{product?.title}</CardTitle>
-          </CardDescriptionContainer>
+
+          <Box sx={{ width: 1, height: "30%", paddingX: 1.25, paddingY: 2 }}>
+            <Typography variant="h4" sx={{ fontSize: 18 }}>
+              $ {product?.price}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }}>{product?.title}</Typography>
+            <Typography sx={{ fontSize: 12 }}>by {product?.brand}</Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
       <CardActions
@@ -121,5 +101,4 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
   );
 };
 
-export default NewArrivalItem;
-
+export default ItemCard;
