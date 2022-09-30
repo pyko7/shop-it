@@ -17,7 +17,6 @@ const CategoriesList: FC<StateProps> = ({
   };
 
   const { isLoading, error, data } = useAllProductsData();
-  console.log(data);
   let categories: string[] = ["all"];
   data?.forEach((product: Product) => {
     if (categories.includes(product.category)) {

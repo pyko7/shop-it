@@ -20,6 +20,5 @@ export const getAllProducts = async (): Promise<Product[]> => {
     const message = `An error has occured: ${res.status}`;
     throw new Error(message);
   }
-  console.log(data.products);
   return data.products as Promise<Product[]>;
 };
