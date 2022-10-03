@@ -25,26 +25,21 @@ const Layout = ({ children }: { children?: ReactNode }) => {
       </Head>
 
       <Header />
+
       <Box
+        component="main"
         sx={{
-          position: "relative",
           width: "100%",
+          minHeight: "100vh",
+          marginY: 0,
+          marginX: "auto",
+          paddingY: .5,
+          backgroundColor: "neutral.main",
         }}
       >
-        <Box
-          component="main"
-          sx={{
-            width: "100%",
-            minHeight: "100vh",
-            maxWidth: 1920,
-            marginY: 0,
-            marginX: "auto",
-          }}
-        >
-          {children}
-        </Box>
-        <BottomNav />
+        {children}
       </Box>
+      <BottomNav />
     </>
   );
 };

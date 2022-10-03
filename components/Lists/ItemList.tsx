@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { StateProps } from "../../context/CategoryContext";
-import { styled } from "@mui/system";
+import { useTheme, useMediaQuery } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
@@ -9,8 +9,6 @@ import {
   Product,
 } from "../../utils/fetchProducts/getAllProducts";
 import ItemCard from "../Cards/ItemCard";
-import useAllProductsData from "../../hooks/useAllProductsData";
-import useProductByCategory from "../../hooks/useProductByCategory";
 import { useDisplayProductsByCategory } from "../../hooks/useDisplayProductsByCategory";
 
 export async function getStaticProps() {
@@ -25,13 +23,8 @@ export async function getStaticProps() {
 
 const NewArrivalList: FC<StateProps> = ({ category }): JSX.Element => {
   const { isLoading, error, data } = useDisplayProductsByCategory(category);
-
-  const ProductsGrid = styled(Grid)(({ theme }) => ({
-    padding: 0,
-    [theme.breakpoints.up("md")]: {
-      flexWrap: "nowrap",
-    },
-  }));
+  const theme = useTheme();
+  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <>
@@ -42,24 +35,39 @@ const NewArrivalList: FC<StateProps> = ({ category }): JSX.Element => {
       ) : (
         <Box
           sx={{
+            width: 1,
+            maxWidth: 1500,
             marginTop: 3,
-            paddingX: 2.5,
+            marginX: "auto",
+            padding: 2.5,
             display: "flex",
             flexDirection: "column",
             gap: 2.5,
+            backgroundColor: "neutral.light",
+            borderRadius: 1,
           }}
         >
-          <ProductsGrid
+          <Grid
             container
-            rowSpacing={1.5}
+            rowSpacing={{ xs: 2, sm: 2.5, md: 3 }}
             columnSpacing={{ xs: 1, md: 3, xl: 1 }}
           >
             {data?.map((product: Product) => (
-              <Grid item xs={6} xl={2} key={product.id}>
+              <Grid
+                item
+                xs={6}
+                md={4}
+                lg={3}
+                sx={{
+                  display: isBiggerThanMobile ? "flex" : "block",
+                  justifyContent: "center",
+                }}
+                key={product.id}
+              >
                 <ItemCard product={product} />
               </Grid>
             ))}
-          </ProductsGrid>
+          </Grid>
         </Box>
       )}
     </>

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { styled } from "@mui/system";
+import { FC, useEffect, useState } from "react";
+import { useMediaQuery, useTheme, styled } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,7 +10,6 @@ import {
 } from "../../utils/fetchProducts/getAllProducts";
 import NewArrivalItem from "../Cards/NewArrivalItem";
 import useAllProductsData from "../../hooks/useAllProductsData";
-import { getRandomProducts } from "../../utils/products/getRandomProducts";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -24,11 +23,28 @@ export async function getStaticProps() {
 
 const NewArrivalList: FC = (): JSX.Element => {
   const { isLoading, error, data } = useAllProductsData();
-  let randomProducts: Product[] = [];
+  const [products, setProducts] = useState<Product[]>([]);
+  const theme = useTheme();
+  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  if (data !== undefined) {
-    getRandomProducts(data, 4, randomProducts);
-  }
+  /*avoid display of others products when user change category*/
+  useEffect(() => {
+    const displayRandomProducts = () => {
+      if (data) {
+        for (let i = 0; i < 4; i++) {
+          let randomProduct: Product =
+            data[Math.floor(Math.random() * data?.length)];
+          const existingProduct: boolean = products.includes(randomProduct);
+          if (existingProduct) {
+            i--;
+          } else {
+            setProducts((productsArray) => [...productsArray, randomProduct]);
+          }
+        }
+      }
+    };
+    displayRandomProducts();
+  }, [data]);
 
   const ProductsGrid = styled(Grid)(({ theme }) => ({
     padding: 0,
@@ -60,8 +76,17 @@ const NewArrivalList: FC = (): JSX.Element => {
               rowSpacing={1.5}
               columnSpacing={{ xs: 1, md: 3, xl: 1 }}
             >
-              {randomProducts.map((product) => (
-                <Grid item xs={6} xl={2} key={product.id}>
+              {products.map((product) => (
+                <Grid
+                  item
+                  xs={6}
+                  xl={2}
+                  sx={{
+                    display: isBiggerThanMobile ? "flex" : "block",
+                    justifyContent: "center",
+                  }}
+                  key={product.id}
+                >
                   <NewArrivalItem product={product} />
                 </Grid>
               ))}

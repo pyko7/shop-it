@@ -51,11 +51,7 @@ const Header = () => {
     >
       <AppBar
         sx={{
-          position: "absolute",
-          left: "50%",
-          transform: "translateX(-50%)",
           width: "100%",
-          maxWidth: 1920,
           height: "70px",
           paddingX: 3,
           bgcolor: "neutral.light",

@@ -1,8 +1,8 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { ProductList } from "../utils/fetchProducts/getAllProducts";
+import { Product } from "../utils/fetchProducts/getAllProducts";
 import { getAllProducts } from "../utils/fetchProducts/getAllProducts";
 
-const useAllProductsData = (): UseQueryResult<ProductList> => {
+const useAllProductsData = (): UseQueryResult<Product[]> => {
   return useQuery(["allProducts"], () => getAllProducts());
 };
 
