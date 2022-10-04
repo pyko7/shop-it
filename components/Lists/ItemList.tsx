@@ -8,7 +8,7 @@ import {
   getAllProducts,
   Product,
 } from "../../utils/fetchProducts/getAllProducts";
-import ItemCard from "../Cards/ItemCard";
+import GridItemCard from "../Cards/GridItemCard";
 import { useDisplayProductsByCategory } from "../../hooks/useDisplayProductsByCategory";
 
 export async function getStaticProps() {
@@ -64,7 +64,7 @@ const NewArrivalList: FC<StateProps> = ({ category }): JSX.Element => {
                 }}
                 key={product.id}
               >
-                <ItemCard product={product} />
+                <GridItemCard product={product} />
               </Grid>
             ))}
           </Grid>

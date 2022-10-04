@@ -7,7 +7,6 @@ import NewArrivalList from "../components/Lists/NewArrivalList";
 import CategoriesList from "../components/Lists/CategoriesList";
 import ItemList from "../components/Lists/ItemList";
 import ScrollToTopButton from "../components/Navigation/ScrollToTopButton";
-import { getProductByCategories } from "../utils/fetchProducts/getProductsByCategories";
 import { CategoryContext, StateProps } from "../context/CategoryContext";
 
 const Home: NextPage = () => {
@@ -15,7 +14,6 @@ const Home: NextPage = () => {
   const [category, setCategory] = useState<string | null>(null);
   const categoryState: StateProps = { category, setCategory };
   const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
-  getProductByCategories("fragrances");
   return (
     <>
       {/*New arrival section*/}
@@ -23,8 +21,12 @@ const Home: NextPage = () => {
         component="section"
         sx={{
           width: "100%",
-          paddingX: 2.5,
-          marginTop: isBiggerThanTablet ? 6 : 3,
+          maxWidth: 1500,
+          padding: 2.5,
+          marginTop: isBiggerThanTablet ? 6 : 0,
+          marginX: "auto",
+          backgroundColor: "neutral.light",
+          borderRadius: 1,
         }}
       >
         <NewArrivalList />
@@ -35,7 +37,7 @@ const Home: NextPage = () => {
           component="section"
           sx={{
             width: "100%",
-            paddingY: 1.5,
+            paddingTop: isBiggerThanTablet ? 1.5 : 0,
             gap: 2.5,
           }}
         >

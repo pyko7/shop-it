@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -62,11 +63,13 @@ const Header = () => {
           boxShadow: 0,
         }}
       >
-        <Box sx={{ width: "50%" }}>
-          <Typography sx={{ fontSize: matches ? 24 : 20, fontWeight: 500 }}>
-            Shop-it!
-          </Typography>
-        </Box>
+        <Link href="/">
+          <a style={{ width: "50%", textDecoration: "none", color: "inherit" }}>
+            <Typography sx={{ fontSize: matches ? 24 : 20, fontWeight: 500 }}>
+              Shop-it!
+            </Typography>
+          </a>
+        </Link>
 
         <Box
           sx={{

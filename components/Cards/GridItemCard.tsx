@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
@@ -21,7 +21,8 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
   const [isLiked, setIsLiked] = useState(false);
   const [animation, setAnimation] = useState(false);
 
-  const handleLike = () => {
+  const handleLike = (event: any): void => {
+    event.preventDefault();
     if (isLiked) {
       setIsLiked(false);
       setAnimation(false);
@@ -102,19 +103,19 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
           >
             <IconButton
               sx={{ width: 14, height: 14 }}
-              onClick={() => handleLike()}
+              onClick={(event) => handleLike(event)}
             >
               {isLiked ? (
                 <Grow in={animation} timeout={250}>
                   <FavoriteIcon
                     fontSize="inherit"
-                    sx={{ color: "primary.main", fontWeight: 500 }}
+                    sx={{ color: "primary.main", fontWeight: 500, zIndex: 100 }}
                   />
                 </Grow>
               ) : (
                 <FavoriteBorderOutlinedIcon
                   fontSize="inherit"
-                  sx={{ color: "primary.main" }}
+                  sx={{ color: "primary.main", zIndex: 100 }}
                 />
               )}
             </IconButton>
