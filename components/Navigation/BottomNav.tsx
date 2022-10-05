@@ -17,7 +17,7 @@ const BottomNav = () => {
     <>
       {matches ? null : (
         <BottomNavigation
-          sx={{ position: "sticky", bottom: 0, width: 1 }}
+          sx={{ position: "sticky", bottom: 0, width: 1, zIndex: 100 }}
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);

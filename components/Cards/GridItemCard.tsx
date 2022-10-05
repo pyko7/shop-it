@@ -1,6 +1,7 @@
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -18,19 +19,13 @@ interface ProductProps {
 }
 
 const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [animation, setAnimation] = useState(false);
+  const { handleFavorite, handleFavoriteIcon } = useFavoriteProductsList();
+  let favoriteList = handleFavoriteIcon(product?.id);
+  const [isFav, setIsFav] = useState<boolean>(false);
 
-  const handleLike = (event: any): void => {
-    event.preventDefault();
-    if (isLiked) {
-      setIsLiked(false);
-      setAnimation(false);
-    } else {
-      setAnimation(true);
-      setIsLiked(true);
-    }
-  };
+  useEffect(() => {
+    return favoriteList ? setIsFav(true) : setIsFav(false);
+  }, [favoriteList]);
 
   return (
     <Link
@@ -103,10 +98,10 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
           >
             <IconButton
               sx={{ width: 14, height: 14 }}
-              onClick={(event) => handleLike(event)}
+              onClick={(event) => handleFavorite(event, product?.id)}
             >
-              {isLiked ? (
-                <Grow in={animation} timeout={250}>
+              {isFav ? (
+                <Grow in={isFav} timeout={250}>
                   <FavoriteIcon
                     fontSize="inherit"
                     sx={{ color: "primary.main", fontWeight: 500, zIndex: 100 }}

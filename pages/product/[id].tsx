@@ -13,8 +13,6 @@ const ItemPage: NextPage = () => {
 
   const { isLoading, error, data } = useProductByIdData(itemId);
 
-  console.log(data);
-
   return (
     <>
       {isLoading ? (

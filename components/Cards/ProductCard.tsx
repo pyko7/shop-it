@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { ProductProps } from "./NewArrivalItem";
 import Image from "next/image";
+import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Icon from "@mui/material/Icon";
@@ -11,7 +12,18 @@ import AddToCartButton from "../Buttons/AddToCartButton";
 import { useMediaQuery, useTheme, styled } from "@mui/material";
 import AddToFavCircleButton from "../Buttons/AddToFavCircleButton";
 
+export interface StateProps {
+  isFav: boolean;
+  productId: number;
+}
+
 const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
+  const { handleFavoriteIcon } = useFavoriteProductsList();
+  let favoriteList = handleFavoriteIcon(product?.id);
+  const [isFav, setIsFav] = useState<boolean>(false);
+  const productId = product.id;
+  const favoriteState: StateProps = { isFav, productId };
+
   const theme = useTheme();
   const isDesktopView = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -27,6 +39,10 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
       justifyContent: "space-between",
     },
   }));
+
+  useEffect(() => {
+    return favoriteList ? setIsFav(true) : setIsFav(false);
+  }, [favoriteList]);
 
   return (
     <Box
@@ -53,9 +69,11 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
         {product?.images.map((product) => (
           <Box
             sx={{
+              position: "relative",
               width: 1,
               height: 350,
             }}
+            key={product}
           >
             <Image
               src={product}
@@ -136,7 +154,7 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
         </Box>
 
         <ButtonsContainer>
-          <AddToFavCircleButton />
+          <AddToFavCircleButton {...favoriteState} />
           <AddToCartButton label="Add to Cart" />
         </ButtonsContainer>
       </Box>

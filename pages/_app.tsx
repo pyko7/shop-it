@@ -9,6 +9,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../styles/theme";
 import Layout from "../components/Layout";
+import { FavoriteListProvider } from "../context/FavoriteProductsContext";
 
 // modified version - allows for custom pageProps type, falling back to 'any'
 // created to solve dehydratedState type problem - solution here: https://stackoverflow.com/a/67464299
@@ -32,10 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
-          <Layout>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </Layout>
+          <FavoriteListProvider>
+            <Layout>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </Layout>
+          </FavoriteListProvider>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>

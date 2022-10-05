@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
@@ -19,19 +20,9 @@ export interface ProductProps {
 }
 
 const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [animation, setAnimation] = useState(false);
-
-  const handleLike = (event: any): void => {
-    event.preventDefault();
-    if (isLiked) {
-      setIsLiked(false);
-      setAnimation(false);
-    } else {
-      setAnimation(true);
-      setIsLiked(true);
-    }
-  };
+  const { handleFavorite, handleFavoriteIcon } = useFavoriteProductsList();
+  let favoriteList = handleFavoriteIcon(product?.id);
+  const [isFav, setIsFav] = useState<boolean>(false);
 
   const CardDescriptionContainer = styled("div")(({ theme }) => ({
     position: "absolute",
@@ -58,6 +49,10 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
     fontSize: 12,
     fontWeight: 500,
   });
+
+  useEffect(() => {
+    return favoriteList ? setIsFav(true) : setIsFav(false);
+  }, [favoriteList]);
 
   return (
     <Link
@@ -119,10 +114,10 @@ const NewArrivalItem: FC<ProductProps> = ({ product }): JSX.Element => {
           >
             <IconButton
               sx={{ width: 14, height: 14 }}
-              onClick={(event) => handleLike(event)}
+              onClick={(event) => handleFavorite(event, product?.id)}
             >
-              {isLiked ? (
-                <Grow in={animation} timeout={250}>
+              {isFav ? (
+                <Grow in={isFav} timeout={250}>
                   <FavoriteIcon
                     fontSize="inherit"
                     sx={{ color: "primary.main", fontWeight: 500 }}

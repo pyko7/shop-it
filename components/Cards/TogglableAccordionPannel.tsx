@@ -49,7 +49,7 @@ const TogglableAccordionPannel: FC<AccordionProps> = ({
       {isOpen && label.includes("reviews") ? (
         <Box sx={{ width: 1, marginTop: 2 }}>
           <Typography paragraph sx={{ fontSize: 14 }}>
-            There aren't reviews for this product yet
+            There aren&apos;t reviews for this product yet
           </Typography>
         </Box>
       ) : null}
