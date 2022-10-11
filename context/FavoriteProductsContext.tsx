@@ -1,9 +1,12 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode, useReducer } from "react";
+import favoriteReducer, { ListOfId } from "../reducers/favoriteReducer";
 
 type FavoriteProductListProps = { children: ReactNode };
+
 interface FavoriteProductsListContext {
   handleFavorite: (event: any, id: number) => void;
   handleFavoriteIcon: (id: number) => boolean;
+  state: ListOfId;
 }
 
 const FavoriteProductsListContext = createContext(
@@ -14,14 +17,19 @@ export const useFavoriteProductsList = () => {
   return useContext(FavoriteProductsListContext);
 };
 
-const setProductToFavorite = (favorite: number[]) => {
+const addProductToFavorite = (favorite: ListOfId) => {
   localStorage.setItem("favorites", JSON.stringify(favorite));
 };
 
 const getFavorites = () => {
-  let favoriteList = localStorage.getItem("favorites");
+  let favoriteList: string | null = null;
+  if (typeof window !== "undefined") {
+    favoriteList = localStorage?.getItem("favorites");
+  }
   if (!favoriteList) {
-    return [];
+    return {
+      idList: [],
+    };
   } else {
     return JSON.parse(favoriteList);
   }
@@ -30,34 +38,44 @@ const getFavorites = () => {
 export const FavoriteListProvider = ({
   children,
 }: FavoriteProductListProps) => {
-  const [favoriteList, setFavoriteList] = useState<number[]>([]);
+  const initialState = getFavorites();
+
+  const [state, dispatch] = useReducer(favoriteReducer, initialState);
 
   const handleFavorite = (event: any, id: number) => {
     event.preventDefault();
-    let favoriteList = getFavorites();
-    if (favoriteList.includes(id)) {
-      const newList = favoriteList.filter(
+    if (!state.idList.includes(id)) {
+      const updatedList: number[] = state.idList.concat(id);
+      addProductToFavorite({ idList: updatedList });
+      dispatch({
+        type: "ADD_TO_FAVORITE",
+        payload: updatedList,
+      });
+    } else {
+      const updatedList: number[] = state.idList.filter(
         (productId: number) => productId !== id
       );
-      setFavoriteList(newList);
-      return setProductToFavorite(newList);
-    } else {
-      favoriteList.push(id);
-      setFavoriteList(favoriteList);
-      return setProductToFavorite(favoriteList);
+      addProductToFavorite({ idList: updatedList });
+      dispatch({
+        type: "REMOVE_FROM_FAVORITE",
+        payload: updatedList,
+      });
     }
   };
 
   const handleFavoriteIcon = (id: number): boolean => {
-    let favoriteList = getFavorites();
-    return favoriteList.find((productId: number) => productId === id)
+    return state.idList.find((productId: number) => productId === id)
       ? true
       : false;
   };
 
   return (
     <FavoriteProductsListContext.Provider
-      value={{ handleFavorite, handleFavoriteIcon }}
+      value={{
+        handleFavorite,
+        handleFavoriteIcon,
+        state,
+      }}
     >
       {children}
     </FavoriteProductsListContext.Provider>

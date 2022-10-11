@@ -17,6 +17,7 @@ export interface StateProps {
   productId: number;
 }
 
+/*Page of a single item*/
 const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
   const { handleFavoriteIcon } = useFavoriteProductsList();
   let favoriteList = handleFavoriteIcon(product?.id);

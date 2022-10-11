@@ -19,13 +19,14 @@ interface ProductProps {
 }
 
 const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
-  const { handleFavorite, handleFavoriteIcon } = useFavoriteProductsList();
-  let favoriteList = handleFavoriteIcon(product?.id);
   const [isFav, setIsFav] = useState<boolean>(false);
+  const { handleFavoriteIcon, handleFavorite, state } =
+    useFavoriteProductsList();
+  let isInFavoriteList = handleFavoriteIcon(product?.id);
 
   useEffect(() => {
-    return favoriteList ? setIsFav(true) : setIsFav(false);
-  }, [favoriteList]);
+    return isInFavoriteList ? setIsFav(true) : setIsFav(false);
+  }, [state.idList, product.id]);
 
   return (
     <Link
@@ -98,7 +99,7 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
           >
             <IconButton
               sx={{ width: 14, height: 14 }}
-              onClick={(event) => handleFavorite(event, product?.id)}
+              onClick={(event) => handleFavorite(event, product.id)}
             >
               {isFav ? (
                 <Grow in={isFav} timeout={250}>

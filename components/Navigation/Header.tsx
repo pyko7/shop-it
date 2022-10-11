@@ -10,10 +10,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const Header = () => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -43,6 +44,13 @@ const Header = () => {
     borderBottomRightRadius: "4px",
   });
 
+  const HeaderIcons = styled(IconButton)(({ theme }) => ({
+    "&:hover": {
+      color: theme.palette.primary.main,
+      background: "transparent",
+    },
+  }));
+
   return (
     <Box
       sx={{
@@ -65,7 +73,9 @@ const Header = () => {
       >
         <Link href="/">
           <a style={{ width: "50%", textDecoration: "none", color: "inherit" }}>
-            <Typography sx={{ fontSize: matches ? 24 : 20, fontWeight: 500 }}>
+            <Typography
+              sx={{ fontSize: isBiggerThanMobile ? 24 : 20, fontWeight: 500 }}
+            >
               Shop-it!
             </Typography>
           </a>
@@ -80,7 +90,7 @@ const Header = () => {
             gap: 0.5,
           }}
         >
-          {matches ? (
+          {isBiggerThanMobile ? (
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -88,22 +98,43 @@ const Header = () => {
               <SearchInput />
             </Search>
           ) : null}
-          <IconButton
+
+          {isBiggerThanMobile ? (
+            <Link href="/favorites">
+              <a
+                style={{
+                  width: "fit-content",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <HeaderIcons
+                  size="large"
+                  sx={{ fontSize: isBiggerThanMobile ? 28 : null }}
+                  aria-label="favorite page"
+                >
+                  <FavoriteIcon fontSize="inherit" />
+                </HeaderIcons>
+              </a>
+            </Link>
+          ) : null}
+
+          <HeaderIcons
             size="large"
-            sx={{ fontSize: matches ? 28 : null }}
+            sx={{ fontSize: isBiggerThanMobile ? 28 : null }}
             aria-label="user cart"
           >
             <ShoppingCartIcon fontSize="inherit" />
-          </IconButton>
+          </HeaderIcons>
 
-          {matches ? (
-            <IconButton
+          {isBiggerThanMobile ? (
+            <HeaderIcons
               size="large"
               sx={{ fontSize: 32 }}
-              aria-label="user cart"
+              aria-label="profile page"
             >
               <PersonIcon fontSize="inherit" />
-            </IconButton>
+            </HeaderIcons>
           ) : null}
         </Box>
       </AppBar>
