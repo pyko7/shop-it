@@ -156,7 +156,7 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
 
         <ButtonsContainer>
           <AddToFavCircleButton {...favoriteState} />
-          <AddToCartButton label="Add to Cart" />
+          <AddToCartButton productId={product.id} />
         </ButtonsContainer>
       </Box>
     </Box>
