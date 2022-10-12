@@ -4,45 +4,16 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
-import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Searchbar from "./Searchbar";
 
 const Header = () => {
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    width: "33%",
-    minWidth: "250px",
-    height: "40px",
-    padding: "0 10px 0 10px",
-    marginRight: "20px",
-    display: "flex",
-    gap: "2px",
-    borderRadius: "4px",
-    backgroundColor: theme.palette.neutral?.main,
-  }));
-
-  const SearchIconWrapper = styled("div")({
-    width: "fit-content",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-  });
-
-  const SearchInput = styled(InputBase)({
-    width: "100%",
-    height: "100%",
-    paddingLeft: "6px",
-    borderTopRightRadius: "4px",
-    borderBottomRightRadius: "4px",
-  });
 
   const HeaderIcons = styled(IconButton)(({ theme }) => ({
     "&:hover": {
@@ -90,14 +61,7 @@ const Header = () => {
             gap: 0.5,
           }}
         >
-          {isBiggerThanMobile ? (
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <SearchInput />
-            </Search>
-          ) : null}
+          {isBiggerThanMobile ? <Searchbar /> : null}
 
           {isBiggerThanMobile ? (
             <Link href="/favorites">
