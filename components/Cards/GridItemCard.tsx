@@ -26,7 +26,7 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
 
   useEffect(() => {
     return isInFavoriteList ? setIsFav(true) : setIsFav(false);
-  }, [state.idList, product.id]);
+  }, [isInFavoriteList]);
 
   return (
     <Link

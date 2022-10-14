@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useCallback, useEffect } from "react";
 import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,7 @@ const FavoriteList: FC = (): JSX.Element => {
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const getFavoriteProducts = async () => {
+  const getFavoriteProducts = useCallback(async () => {
     const favoriteProducts = state.idList.map((id) =>
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`)
     );
@@ -22,11 +22,11 @@ const FavoriteList: FC = (): JSX.Element => {
         setFavoriteList(data);
       })
       .catch((error) => console.log(error));
-  };
+  }, [state.idList]);
 
   useEffect(() => {
     getFavoriteProducts();
-  }, [state]);
+  }, [state, getFavoriteProducts]);
 
   return (
     <Box

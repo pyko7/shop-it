@@ -11,14 +11,16 @@ interface AddToCartButtonProps {
 const AddToCartButton: FC<AddToCartButtonProps> = ({
   productId,
 }): JSX.Element => {
-  const { addProductToCart } = useCartContext();
+  const { increaseQuantity, cartTotalQuantity, setCartTotalQuantity } =
+    useCartContext();
   const [isAdded, setIsAdded] = useState(false);
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
   const addToCart = () => {
-    addProductToCart(productId);
+    increaseQuantity(productId);
     setIsAdded(true);
+    setCartTotalQuantity(cartTotalQuantity + 1);
     setTimeout(() => {
       setIsAdded(false);
     }, 5000);

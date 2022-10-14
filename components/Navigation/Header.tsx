@@ -17,8 +17,7 @@ import { useCartContext } from "../../context/CartContext";
 const Header = () => {
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-  const { getCartQuantity } = useCartContext();
-  const [cartQuantity, setCartQuantity] = useState<number>(0);
+  const { getCartQuantity, cartTotalQuantity } = useCartContext();
 
   const HeaderIcons = styled(IconButton)(({ theme }) => ({
     "&:hover": {
@@ -27,7 +26,9 @@ const Header = () => {
     },
   }));
 
-  useEffect(() => setCartQuantity(getCartQuantity()), []);
+  useEffect(() => {
+    getCartQuantity();
+  }, []);
 
   return (
     <Box
@@ -90,15 +91,24 @@ const Header = () => {
             </Link>
           ) : null}
 
-          <HeaderIcons
-            size="large"
-            sx={{ fontSize: isBiggerThanMobile ? 28 : null }}
-            aria-label="user cart"
-          >
-            <Badge color="primary" badgeContent={cartQuantity} max={99}>
-              <ShoppingCartIcon fontSize="inherit" />
-            </Badge>
-          </HeaderIcons>
+          <Link href="/cart">
+            <a style={{ textDecoration: "none", color: "inherit" }}>
+              <HeaderIcons
+                size="large"
+                sx={{ fontSize: isBiggerThanMobile ? 28 : null }}
+                aria-label="user cart"
+              >
+                <Badge
+                  color="primary"
+                  invisible={cartTotalQuantity < 0 ? true : false}
+                  badgeContent={cartTotalQuantity}
+                  max={99}
+                >
+                  <ShoppingCartIcon fontSize="inherit" />
+                </Badge>
+              </HeaderIcons>
+            </a>
+          </Link>
 
           {isBiggerThanMobile ? (
             <HeaderIcons
