@@ -11,8 +11,12 @@ interface AddToCartButtonProps {
 const AddToCartButton: FC<AddToCartButtonProps> = ({
   productId,
 }): JSX.Element => {
-  const { increaseQuantity, cartTotalQuantity, setCartTotalQuantity } =
-    useCartContext();
+  const {
+    increaseQuantity,
+    cartTotalQuantity,
+    setCartTotalQuantity,
+    setAnchorEl,
+  } = useCartContext();
   const [isAdded, setIsAdded] = useState(false);
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));

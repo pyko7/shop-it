@@ -1,16 +1,16 @@
 import { FC, useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import ClearIcon from "@mui/icons-material/Clear";
-import ItemQuantityButtons from "../Buttons/ItemQuantityButtons";
-import { useCartContext } from "../../context/CartContext";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { ProductProps } from "./NewArrivalItem";
-import { useTheme } from "@mui/material";
+import { useCartContext } from "../../context/CartContext";
 
-const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
+const AddedProductInModal: FC<ProductProps> = ({ product }) => {
   const theme = useTheme();
   const {
     getProductQuantity,
@@ -42,13 +42,15 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
   return (
     <>
       {!isVisible ? null : (
-        <Box
+        <MenuItem
           sx={{
             width: "100%",
-            marginY: 1.5,
+            marginY: 0.5,
+            padding: "5px",
             display: "flex",
             alignItems: "center",
             textDecoration: "none",
+            backgroundColor: theme.palette.neutral?.light,
             color: "inherit",
           }}
         >
@@ -93,6 +95,7 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
               </Typography>
               <Typography sx={{ fontSize: 14 }}>{product?.title}</Typography>
               <Typography sx={{ fontSize: 12 }}>by {product?.brand}</Typography>
+              <Typography sx={{ fontSize: 12 }}>Qty: {quantity}</Typography>
             </Box>
             <Box
               sx={{
@@ -106,22 +109,16 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
                 aria-label="delete"
                 onClick={() => removeProduct()}
                 color="default"
-                sx={{ position: "absolute", top: 0, right: 0, padding: 0 }}
+                sx={{ position: "absolute", bottom: 10, right: 5, padding: 0 }}
               >
-                <ClearIcon fontSize="small" />
+                <DeleteIcon />
               </IconButton>
-
-              <ItemQuantityButtons
-                productId={product.id}
-                quantity={quantity}
-                setQuantity={setQuantity}
-              />
             </Box>
           </Box>
-        </Box>
+        </MenuItem>
       )}
     </>
   );
 };
 
-export default ProductInCartCard;
+export default AddedProductInModal;

@@ -36,7 +36,7 @@ const FavoriteList: FC = (): JSX.Element => {
         marginTop: 3,
         marginX: "auto",
         paddingY: isBiggerThanMobile ? 2.5 : 0,
-        paddingX: 2.5,
+        paddingX: 0.5,
         display: "flex",
         flexDirection: "column",
         gap: 2.5,
@@ -44,15 +44,30 @@ const FavoriteList: FC = (): JSX.Element => {
         borderRadius: 1,
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{
-          fontSize: 22,
-          fontWeight: 500,
-        }}
-      >
-        My favorites
-      </Typography>
+      <Box sx={{ position: "relative" }}>
+        <Typography
+          variant="h2"
+          sx={{
+            marginBottom: 2,
+            fontSize: 22,
+            fontWeight: 500,
+          }}
+        >
+          My favorites
+        </Typography>
+
+        <Box
+          component="span"
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            width: 1,
+            height: 2,
+            backgroundColor: "neutral.main",
+          }}
+        />
+      </Box>
+
       <Grid
         container
         rowSpacing={{ xs: 2, sm: 2.5, md: 3 }}

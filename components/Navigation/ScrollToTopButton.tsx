@@ -16,7 +16,7 @@ const ScrollToTopButton: FC = (): JSX.Element => {
     <Fade in={trigger}>
       <Box
         role="presentation"
-        sx={{ position: "fixed", bottom: 75, right: 16, zIndex: 1 }}
+        sx={{ position: "fixed", bottom: 75, right: 16, zIndex: 2 }}
       >
         <Fab onClick={scrollToTop} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

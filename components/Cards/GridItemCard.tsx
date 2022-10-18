@@ -20,8 +20,7 @@ interface ProductProps {
 
 const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
   const [isFav, setIsFav] = useState<boolean>(false);
-  const { handleFavoriteIcon, handleFavorite, state } =
-    useFavoriteProductsList();
+  const { handleFavoriteIcon, handleFavorite } = useFavoriteProductsList();
   let isInFavoriteList = handleFavoriteIcon(product?.id);
 
   useEffect(() => {
@@ -105,13 +104,13 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
                 <Grow in={isFav} timeout={250}>
                   <FavoriteIcon
                     fontSize="inherit"
-                    sx={{ color: "primary.main", fontWeight: 500, zIndex: 100 }}
+                    sx={{ color: "primary.main", fontWeight: 500 }}
                   />
                 </Grow>
               ) : (
                 <FavoriteBorderOutlinedIcon
                   fontSize="inherit"
-                  sx={{ color: "primary.main", zIndex: 100 }}
+                  sx={{ color: "primary.main" }}
                 />
               )}
             </IconButton>

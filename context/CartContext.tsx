@@ -9,6 +9,8 @@ type CartItem = {
 interface CartContext {
   cartTotalQuantity: number;
   setCartTotalQuantity: (cartTotalQuantity: number) => void;
+  anchorEl: HTMLButtonElement | null;
+  setAnchorEl: (anchorEl: HTMLButtonElement | null) => void;
   getCart: () => [] | CartItem[];
   getCartQuantity: () => number;
   getProductQuantity: (id: number) => number | undefined;
@@ -16,6 +18,7 @@ interface CartContext {
   decreaseQuantity: (id: number) => void;
   removeProductFromCart: (id: number) => void;
 }
+
 const CartContext = createContext({} as CartContext);
 
 export const useCartContext = () => {
@@ -41,6 +44,7 @@ export const getCart = () => {
 export const CartProvider = ({ children }: CartProps) => {
   let cart: CartItem[] = getCart();
   const [cartTotalQuantity, setCartTotalQuantity] = useState<number>(0);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const getCartQuantity = (): number => {
     let total: number[] = [];
@@ -89,11 +93,16 @@ export const CartProvider = ({ children }: CartProps) => {
 
   const removeProductFromCart = (id: number): void => {
     addToCart(cart.filter((product: CartItem) => product.id !== id));
+    if (cart.length === 0) {
+      localStorage.removeItem("cart");
+    }
   };
 
   return (
     <CartContext.Provider
       value={{
+        anchorEl,
+        setAnchorEl,
         cartTotalQuantity,
         setCartTotalQuantity,
         getCart,
