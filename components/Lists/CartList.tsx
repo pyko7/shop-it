@@ -1,9 +1,8 @@
-import { FC, useState, useCallback, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import { useCartContext } from "../../context/CartContext";
 import ProductInCartCard from "../Cards/ProductInCartCard";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

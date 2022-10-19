@@ -1,37 +1,40 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useCartContext } from "../../context/CartContext";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
 import CartDropDownButton from "../Buttons/CartDropDownButton";
 import DropdownMenuCard from "../Cards/DropdownMenuCard";
+import { useQueries } from "@tanstack/react-query";
+import { getProductById } from "../../utils/fetchProducts/getProductsById";
+import LoadingSpinner from "../UserFeedback/LoadingSpinner";
+import ErrorMessage from "../UserFeedback/ErrorMessage";
 
 const CartDropdown = () => {
   const { getCart, cartTotalQuantity } = useCartContext();
   const cart = getCart();
-  const [isCart, setIsCart] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   let productPrice: number[] = [];
 
-  const getCartProducts = useCallback(async () => {
-    const cartProducts = cart.map((product) =>
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${product.id}`)
-    );
-    await Promise.all(cartProducts)
-      .then((res) => Promise.all(res.map((r) => r.json())))
-      .then((data) => {
-        setIsCart(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const userQueries = useQueries({
+    queries: cart.map((product) => {
+      return {
+        queryKey: ["product", product.id],
+        queryFn: () => getProductById(product.id),
+        staleTime: Infinity,
+      };
+    }),
+  });
+
+  const isLoading = userQueries.some((userQuery) => userQuery.isLoading);
+  const error = userQueries.some((userQuery) => userQuery.error);
 
   const getProductPrices = () => {
-    isCart.forEach((product) => {
+    userQueries.forEach((product) => {
       cart.map((item) => {
-        if (product.id === item.id) {
-          productPrice.push(product.price * item.quantity);
+        if (product.data?.id === item.id) {
+          productPrice.push(product.data?.price * item.quantity);
         }
       });
     });
@@ -42,10 +45,6 @@ const CartDropdown = () => {
       )
     );
   };
-
-  useEffect(() => {
-    getCartProducts();
-  }, [getCartProducts]);
 
   useEffect(() => {
     getProductPrices();
@@ -102,13 +101,24 @@ const CartDropdown = () => {
             : cartTotalQuantity + " item"}
         </Typography>
       </Box>
-
-      <Box>
-        {isCart.map((product) => {
-          return <DropdownMenuCard product={product} key={product.id} />;
-        })}
-      </Box>
-
+      <>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <ErrorMessage />
+        ) : (
+          <Box>
+            {userQueries.map((product) => {
+              return (
+                <DropdownMenuCard
+                  product={product.data!}
+                  key={product.data?.id}
+                />
+              );
+            })}
+          </Box>
+        )}
+      </>
       <Box
         sx={{
           position: "sticky",
