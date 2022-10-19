@@ -4,19 +4,22 @@ import Searchbar from "./Searchbar";
 import { styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Badge from "@mui/material/Badge";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useCartContext } from "../../context/CartContext";
 import HeaderCartDropdown from "../Menus/HeaderCartDropdown";
 
 const Header = () => {
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-  const { getCartQuantity } = useCartContext();
+  const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
+  const { getCartQuantity, cartTotalQuantity } = useCartContext();
   const HeaderIcons = styled(IconButton)(({ theme }) => ({
     "&:hover": {
       color: theme.palette.primary.main,
@@ -26,7 +29,7 @@ const Header = () => {
 
   useEffect(() => {
     getCartQuantity();
-  }, []);
+  }, [getCartQuantity]);
 
   return (
     <Box
@@ -94,7 +97,34 @@ const Header = () => {
             </Link>
           ) : null}
 
-          <HeaderCartDropdown />
+          {isBiggerThanTablet ? (
+            <HeaderCartDropdown />
+          ) : (
+            <Link href="/cart">
+              <a
+                style={{
+                  width: "fit-content",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <HeaderIcons
+                  size="large"
+                  sx={{ fontSize: isBiggerThanMobile ? 28 : null }}
+                  aria-label="user cart"
+                >
+                  <Badge
+                    color="primary"
+                    invisible={cartTotalQuantity < 0 ? true : false}
+                    badgeContent={cartTotalQuantity}
+                    max={99}
+                  >
+                    <ShoppingCartIcon fontSize="inherit" />
+                  </Badge>
+                </HeaderIcons>
+              </a>
+            </Link>
+          )}
 
           {isBiggerThanMobile ? (
             <HeaderIcons

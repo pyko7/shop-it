@@ -5,7 +5,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import useAllProductsData from "../../hooks/useAllProductsData";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
-import LoadingSpinner from "../Loaders/LoadingSpinner";
+import LoadingSpinner from "../UserFeedback/LoadingSpinner";
+import ErrorMessage from "../UserFeedback/ErrorMessage";
 
 const CategoriesList: FC<StateProps> = ({ setCategory }): JSX.Element => {
   const [value, setValue] = useState(0);
@@ -30,7 +31,7 @@ const CategoriesList: FC<StateProps> = ({ setCategory }): JSX.Element => {
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
-        <h1>Error...</h1>
+        <ErrorMessage />
       ) : (
         <Box
           sx={{
