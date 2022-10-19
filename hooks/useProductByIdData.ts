@@ -3,7 +3,9 @@ import { Product } from "../utils/fetchProducts/getAllProducts";
 import { getProductById } from "../utils/fetchProducts/getProductsById";
 
 const useProductByIdData = (id: number): UseQueryResult<Product> => {
-  return useQuery(["product", id], () => getProductById(id));
+  return useQuery(["product", id], () => getProductById(id), {
+    staleTime: Infinity,
+  });
 };
 
 export default useProductByIdData;

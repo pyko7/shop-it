@@ -3,8 +3,12 @@ import { Product } from "../utils/fetchProducts/getAllProducts";
 import { getProductByCategories } from "../utils/fetchProducts/getProductsByCategories";
 
 const useProductByCategory = (category: string): UseQueryResult<Product[]> => {
-  return useQuery(["productByCategory", category], () =>
-    getProductByCategories(category)
+  return useQuery(
+    ["productByCategory", category],
+    () => getProductByCategories(category),
+    {
+      staleTime: Infinity,
+    }
   );
 };
 
