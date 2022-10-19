@@ -148,7 +148,7 @@ const CartList: FC = (): JSX.Element => {
                 fontSize: 16,
               }}
             >
-              Price total
+              Total price
             </Typography>
             <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
               $ {totalPrice}

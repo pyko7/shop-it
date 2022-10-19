@@ -46,10 +46,16 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
           sx={{
             width: "100%",
             marginY: 1.5,
+            paddingY: 1,
             display: "flex",
             alignItems: "center",
             textDecoration: "none",
             color: "inherit",
+
+            borderBottom: `1px solid ${theme.palette.neutral?.main}`,
+            "&:last-child": {
+              borderBottom: "1px solid transparent",
+            },
           }}
         >
           <Box
