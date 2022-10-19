@@ -3,14 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ProductProps } from "./NewArrivalItem";
 import { useCartContext } from "../../context/CartContext";
 
-const AddedProductInModal: FC<ProductProps> = ({ product }) => {
+const DropdownMenuCard: FC<ProductProps> = ({ product }) => {
   const theme = useTheme();
   const {
     getProductQuantity,
@@ -42,7 +41,7 @@ const AddedProductInModal: FC<ProductProps> = ({ product }) => {
   return (
     <>
       {!isVisible ? null : (
-        <MenuItem
+        <Box
           sx={{
             width: "100%",
             marginY: 0.5,
@@ -115,10 +114,10 @@ const AddedProductInModal: FC<ProductProps> = ({ product }) => {
               </IconButton>
             </Box>
           </Box>
-        </MenuItem>
+        </Box>
       )}
     </>
   );
 };
 
-export default AddedProductInModal;
+export default DropdownMenuCard;

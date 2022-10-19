@@ -70,7 +70,7 @@ const HeaderCartDropdown = () => {
           vertical: "bottom",
           horizontal: "left",
         }}
-        sx={{ marginLeft: -6 }}
+        sx={{ height: "80%", marginLeft: -6 }}
       >
         <CartDropdown />
       </Popover>

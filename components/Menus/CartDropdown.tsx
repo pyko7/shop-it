@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useCartContext } from "../../context/CartContext";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
 import CartDropDownButton from "../Buttons/CartDropDownButton";
-import AddedProductInModal from "../Cards/AddedProductInModal";
+import DropdownMenuCard from "../Cards/DropdownMenuCard";
 
 const CartDropdown = () => {
   const { getCart, cartTotalQuantity } = useCartContext();
@@ -55,6 +55,7 @@ const CartDropdown = () => {
     position: "relative",
     width: 300,
     height: "100%",
+    maxHeight: 900,
     paddingLeft: 12,
     paddingRight: 12,
     paddingBottom: 10,
@@ -100,40 +101,40 @@ const CartDropdown = () => {
             ? cartTotalQuantity + " items"
             : cartTotalQuantity + " item"}
         </Typography>
-
-        <Box
-          component="span"
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            width: 1,
-            height: 2,
-            backgroundColor: "neutral.main",
-          }}
-        />
       </Box>
 
-      <>
+      <Box>
         {isCart.map((product) => {
-          return <AddedProductInModal product={product} key={product.id} />;
+          return <DropdownMenuCard product={product} key={product.id} />;
         })}
-      </>
+      </Box>
 
       <Box
         sx={{
-          marginTop: 2,
-          paddingY: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          borderTop: "1px solid black",
-          borderBottom: "1px solid black",
+          position: "sticky",
+          bottom: 0,
+          width: 1,
+          paddingBottom: 2,
+          paddingX: 1,
+          bgcolor: "#fff",
         }}
       >
-        <Typography sx={{ fontWeight: 500 }}>Total price:</Typography>
-        <Typography sx={{ fontWeight: 700 }}>${totalPrice}</Typography>
-      </Box>
-      <Box sx={{ marginTop: 2 }}>
-        <CartDropDownButton />
+        <Box
+          sx={{
+            marginTop: 2,
+            paddingY: 2,
+            display: "flex",
+            justifyContent: "space-between",
+            borderTop: "1px solid black",
+            borderBottom: "1px solid black",
+          }}
+        >
+          <Typography sx={{ fontWeight: 500 }}>Total price:</Typography>
+          <Typography sx={{ fontWeight: 700 }}>${totalPrice}</Typography>
+        </Box>
+        <Box sx={{ marginTop: 2 }}>
+          <CartDropDownButton />
+        </Box>
       </Box>
     </Dropdown>
   );
