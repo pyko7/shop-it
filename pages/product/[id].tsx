@@ -4,6 +4,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import useProductByIdData from "../../hooks/useProductByIdData";
 import ProductCard from "../../components/Cards/ProductCard";
+import LoadingSpinner from "../../components/Loaders/LoadingSpinner";
 
 const ItemPage: NextPage = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const ItemPage: NextPage = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <LoadingSpinner />
       ) : error ? (
         <h1>Error...</h1>
       ) : (

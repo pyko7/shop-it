@@ -5,11 +5,9 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import useAllProductsData from "../../hooks/useAllProductsData";
 import { Product } from "../../utils/fetchProducts/getAllProducts";
+import LoadingSpinner from "../Loaders/LoadingSpinner";
 
-const CategoriesList: FC<StateProps> = ({
-  category,
-  setCategory,
-}): JSX.Element => {
+const CategoriesList: FC<StateProps> = ({ setCategory }): JSX.Element => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -30,7 +28,7 @@ const CategoriesList: FC<StateProps> = ({
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <LoadingSpinner />
       ) : error ? (
         <h1>Error...</h1>
       ) : (
@@ -72,4 +70,3 @@ const CategoriesList: FC<StateProps> = ({
 };
 
 export default CategoriesList;
-//overflow-x:scroll

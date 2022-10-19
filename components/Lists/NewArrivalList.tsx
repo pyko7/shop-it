@@ -10,6 +10,7 @@ import {
 } from "../../utils/fetchProducts/getAllProducts";
 import NewArrivalItem from "../Cards/NewArrivalItem";
 import useAllProductsData from "../../hooks/useAllProductsData";
+import LoadingSpinner from "../Loaders/LoadingSpinner";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -56,7 +57,7 @@ const NewArrivalList: FC = (): JSX.Element => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <LoadingSpinner />
       ) : error ? (
         <h1>Error</h1>
       ) : (

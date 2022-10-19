@@ -10,6 +10,7 @@ import {
 } from "../../utils/fetchProducts/getAllProducts";
 import GridItemCard from "../Cards/GridItemCard";
 import { useDisplayProductsByCategory } from "../../hooks/useDisplayProductsByCategory";
+import LoadingSpinner from "../Loaders/LoadingSpinner";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -29,7 +30,7 @@ const NewArrivalList: FC<StateProps> = ({ category }): JSX.Element => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <LoadingSpinner />
       ) : error ? (
         <h1>Error</h1>
       ) : (
