@@ -8,6 +8,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useQueries } from "@tanstack/react-query";
+import { getProductById } from "../../utils/fetchProducts/getProductsById";
+import LoadingSpinner from "../UserFeedback/LoadingSpinner";
+import ErrorMessage from "../UserFeedback/ErrorMessage";
 
 export interface ProductInCart {
   id: number;
@@ -16,30 +20,30 @@ const CartList: FC = (): JSX.Element => {
   const theme = useTheme();
   const { getCart, cartTotalQuantity } = useCartContext();
   const cart = getCart();
-  const [isCart, setIsCart] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const isLaptop = useMediaQuery(theme.breakpoints.between("sm", "lg"));
 
   let productPrice: number[] = [];
 
-  const getCartProducts = useCallback(async () => {
-    const cartProducts = cart.map((product) =>
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${product.id}`)
-    );
-    await Promise.all(cartProducts)
-      .then((res) => Promise.all(res.map((r) => r.json())))
-      .then((data) => {
-        setIsCart(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const userQueries = useQueries({
+    queries: cart.map((product) => {
+      return {
+        queryKey: ["product", product.id],
+        queryFn: () => getProductById(product.id),
+        staleTime: Infinity,
+      };
+    }),
+  });
+
+  const isLoading = userQueries.some((userQuery) => userQuery.isLoading);
+  const error = userQueries.some((userQuery) => userQuery.error);
 
   const getProductPrices = () => {
-    isCart.forEach((product) => {
+    userQueries.forEach((product) => {
       cart.map((item) => {
-        if (product.id === item.id) {
-          productPrice.push(product.price * item.quantity);
+        if (product.data?.id === item.id) {
+          productPrice.push(product.data?.price * item.quantity);
         }
       });
     });
@@ -50,10 +54,6 @@ const CartList: FC = (): JSX.Element => {
       )
     );
   };
-
-  useEffect(() => {
-    getCartProducts();
-  }, [getCartProducts]);
 
   useEffect(() => {
     getProductPrices();
@@ -106,33 +106,47 @@ const CartList: FC = (): JSX.Element => {
             }}
           />
         </Box>
-        <Grid container>
-          <Grid
-            item
-            sx={{
-              width: 1,
-              display: "block",
-              justifyContent: "center",
-            }}
-          >
-            {isCart.map((product) => (
-              <ProductInCartCard product={product} key={product.id} />
-            ))}
-            {cartTotalQuantity >= 1 ? null : (
-              <Box sx={{ width: 1, marginY: 2, textAlign: "center" }}>
-                <ShoppingCartIcon aria-hidden="true" sx={{ fontSize: 28 }} />
-                <Typography sx={{ marginY: 0.75 }}>
-                  Your cart is empty
-                </Typography>
-                <Link href="/">
-                  <a>
-                    <Button>Go to shopping</Button>
-                  </a>
-                </Link>
-              </Box>
-            )}
-          </Grid>
-        </Grid>
+        <>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : error ? (
+            <ErrorMessage />
+          ) : (
+            <Grid container>
+              <Grid
+                item
+                sx={{
+                  width: 1,
+                  display: "block",
+                  justifyContent: "center",
+                }}
+              >
+                {userQueries.map((product) => (
+                  <ProductInCartCard
+                    product={product.data!}
+                    key={product.data?.id}
+                  />
+                ))}
+                {cartTotalQuantity >= 1 ? null : (
+                  <Box sx={{ width: 1, marginY: 2, textAlign: "center" }}>
+                    <ShoppingCartIcon
+                      aria-hidden="true"
+                      sx={{ fontSize: 28 }}
+                    />
+                    <Typography sx={{ marginY: 0.75 }}>
+                      Your cart is empty
+                    </Typography>
+                    <Link href="/">
+                      <a>
+                        <Button>Go to shopping</Button>
+                      </a>
+                    </Link>
+                  </Box>
+                )}
+              </Grid>
+            </Grid>
+          )}
+        </>
         <Box
           sx={{
             width: 1,

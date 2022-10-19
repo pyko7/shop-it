@@ -1,9 +1,16 @@
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ScrollToTopButton from "../../components/Navigation/ScrollToTopButton";
-import FavoriteList from "../../components/Lists/FavoriteList";
+//avoid hydration error - solution found here: https://github.com/vercel/next.js/discussions/35773#discussioncomment-2840696
+const FavoriteList = dynamic(
+  () => import("../../components/Lists/FavoriteList"),
+  {
+    ssr: false,
+  }
+);
 
 const Favorites: NextPage = () => {
   const theme = useTheme();
