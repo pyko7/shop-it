@@ -167,15 +167,17 @@ const CartList: FC = (): JSX.Element => {
               $ {totalPrice}
             </Typography>
           </Box>
+
           <Button
+            href="/checkout"
             variant="contained"
+            size={isBiggerThanMobile ? "medium" : "small"}
             sx={{
               width: "50%",
               maxWidth: isBiggerThanMobile ? 250 : 450,
-              paddingY: 1.25,
             }}
           >
-            Buy
+            Checkout
           </Button>
         </Box>
       </Box>

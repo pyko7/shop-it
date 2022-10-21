@@ -11,7 +11,6 @@ const CartDropDownButton = () => {
     alignItems: "center",
     borderRadius: 4,
     backgroundColor: theme.palette.primary.main,
-    fontWeight: 700,
     textTransform: "uppercase",
     textDecoration: "none",
     cursor: "pointer",
@@ -25,7 +24,6 @@ const CartDropDownButton = () => {
     borderRadius: 4,
     border: `1px solid ${theme.palette.neutral?.dark}`,
     backgroundColor: theme.palette.neutral?.light,
-    fontWeight: 700,
     textTransform: "uppercase",
     textDecoration: "none",
     cursor: "pointer",
@@ -44,7 +42,7 @@ const CartDropDownButton = () => {
       <Link href="/cart">
         <ModalButtonNeutral>View bag</ModalButtonNeutral>
       </Link>
-      <Link href="/payment">
+      <Link href="/checkout">
         <ModalButtonColored>Payment</ModalButtonColored>
       </Link>
     </Box>
