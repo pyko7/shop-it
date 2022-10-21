@@ -8,6 +8,8 @@ export interface ModalStateProps {
   setOpen: (open: boolean) => void;
   address: Address[];
   setAddress: (address: Address[]) => void;
+  selected?: Address | null;
+  setIsSelected: (selected: Address | null) => void;
 }
 
 const CheckoutModal = ({
@@ -15,13 +17,15 @@ const CheckoutModal = ({
   setOpen,
   address,
   setAddress,
+  setIsSelected,
 }: ModalStateProps) => {
   const handleClose = () => setOpen(false);
   const stateProps = {
-    open: open,
-    setOpen: setOpen,
-    address: address,
-    setAddress: setAddress,
+    open,
+    setOpen,
+    address,
+    setAddress,
+    setIsSelected,
   };
   return (
     <Dialog

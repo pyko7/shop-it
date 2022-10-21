@@ -9,7 +9,12 @@ import { addressSchema } from "../../utils/validation/formAddress";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Address } from "../../pages/checkout";
 
-const AddressForm = ({ setOpen, address, setAddress }: ModalStateProps) => {
+const AddressForm = ({
+  setOpen,
+  address,
+  setAddress,
+  setIsSelected,
+}: ModalStateProps) => {
   const handleClose = () => setOpen(false);
   const {
     register,
@@ -27,6 +32,7 @@ const AddressForm = ({ setOpen, address, setAddress }: ModalStateProps) => {
   const onSubmit: SubmitHandler<Address> = (data: Address) => {
     const randomId = getRandomId();
     setAddress([...address, { ...data, id: randomId }]);
+    setIsSelected(true);
     handleClose();
   };
 

@@ -25,13 +25,15 @@ export interface Address {
 const CheckoutPage = () => {
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState<Address[]>([]);
-  const [selected, setIsSelected] = useState(false);
+  const [selected, setIsSelected] = useState<Address | null>(null);
 
   const stateProps = {
-    open: open,
-    setOpen: setOpen,
-    address: address,
-    setAddress: setAddress,
+    open,
+    setOpen,
+    address,
+    setAddress,
+    selected,
+    setIsSelected,
   };
 
   console.log(address);
@@ -93,14 +95,7 @@ const CheckoutPage = () => {
             </Button>
             {!open ? null : <CheckoutModal {...stateProps} />}
             {address.map((add) => (
-              <AddressCard
-                addressData={add}
-                address={address}
-                setAddress={setAddress}
-                selected={selected}
-                setIsSelected={setIsSelected}
-                key={add.id}
-              />
+              <AddressCard addressData={add} {...stateProps} key={add.id} />
             ))}
           </Box>
         </Box>
