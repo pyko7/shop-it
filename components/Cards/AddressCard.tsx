@@ -9,25 +9,29 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import HomeIcon from "@mui/icons-material/Home";
-import { Address } from "../../pages/checkout";
+import { Address } from "~/components/CheckoutPages/AddressPage";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 interface AddressProps {
   addressData: Address;
-  address: Address[];
-  setAddress: (address: Address[]) => void;
+  addressList: Address[];
+  setAddressList: (addressList: Address[]) => void;
   selected: Address | null;
-  setIsSelected: (selected: Address | null) => void;
+  setSelected: (selected: Address | null) => void;
+  selectedAddress: boolean;
+  setSelectedAddress: (selectedAddress: boolean) => void;
 }
 
 const AddressCard = ({
   addressData,
-  address,
-  setAddress,
+  addressList,
+  setAddressList,
   selected,
-  setIsSelected,
+  setSelected,
+  setSelectedAddress,
 }: AddressProps) => {
-  const [selectedAddress, setSelectedAddress] = useState(false);
+  const [isAddressSelected, setIsAddressSelected] = useState(false);
+
   const addressDescription = [
     addressData.firstAddressLine,
     addressData.secondAddressLine,
@@ -37,12 +41,14 @@ const AddressCard = ({
     addressData.country,
   ];
 
-  const handleSelection = () => {
-    setIsSelected(addressData);
+  const handleClick = () => {
+    setSelected(addressData);
   };
 
   const handleDelete = () => {
-    setAddress(address.filter((address) => address.id !== address.id));
+    setAddressList(
+      addressList.filter((address: Address) => address.id !== address.id)
+    );
   };
 
   const AddressCard = styled(Card)(({ theme }) => ({
@@ -50,7 +56,7 @@ const AddressCard = ({
     width: "100%",
     maxWidth: 350,
     padding: 8,
-    border: selectedAddress
+    border: isAddressSelected
       ? `2px solid ${theme.palette.primary.main}`
       : `2px solid transparent`,
     overflow: "visible",
@@ -83,8 +89,10 @@ const AddressCard = ({
   useEffect(() => {
     const handleSelected = () => {
       if (selected?.id === addressData.id) {
+        setIsAddressSelected(true);
         setSelectedAddress(true);
       } else {
+        setIsAddressSelected(false);
         setSelectedAddress(false);
       }
     };
@@ -93,8 +101,8 @@ const AddressCard = ({
 
   return (
     <AddressCard>
-      <AddressCardActionArea onClick={() => handleSelection()}>
-        {selectedAddress ? (
+      <AddressCardActionArea onClick={() => handleClick()}>
+        {isAddressSelected ? (
           <CheckCircleIcon
             sx={{
               position: "absolute",
@@ -125,7 +133,7 @@ const AddressCard = ({
           sx={{ display: "flex", flexDirection: "column", rowGap: 2.5 }}
         >
           <Box>
-            <UserInformation sx={{ fontWeight: 500 }}>
+            <UserInformation>
               {addressData.firstName} {addressData.lastName}
             </UserInformation>
             <UserInformation>{addressData.phoneNumber}</UserInformation>

@@ -1,50 +1,14 @@
 import { useState } from "react";
-import { useTheme, useMediaQuery, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import CheckoutStepper from "../../components/Navigation/CheckoutStepper";
-import AddressCard from "../../components/Cards/AddressCard";
-import CheckoutModal from "../../components/Modals/CheckoutModal";
-
-export interface Address {
-  id: number;
-  addressName: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  firstAddressLine: string;
-  secondAddressLine?: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  country: string;
-}
+import AddressPage from "~/components/CheckoutPages/AddressPage";
+import CheckoutStepper from "~/components/Navigation/CheckoutStepper";
+import PaymentPage from "~/components/CheckoutPages/PaymentPage";
+import PlacedOrderPage from "~/components/CheckoutPages/PlacedOrderPage";
 
 const CheckoutPage = () => {
-  const [open, setOpen] = useState(false);
-  const [address, setAddress] = useState<Address[]>([]);
-  const [selected, setIsSelected] = useState<Address | null>(null);
-
-  const stateProps = {
-    open,
-    setOpen,
-    address,
-    setAddress,
-    selected,
-    setIsSelected,
-  };
-
-  console.log(address);
-  const theme = useTheme();
-  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const SectionTitle = styled(Typography)({
-    margin: "20px 0",
-    fontWeight: 500,
-    fontSize: isBiggerThanMobile ? 18 : 16,
-  });
+  const [activeStep, setActiveStep] = useState(1);
+  const stepState = { activeStep, setActiveStep };
 
   return (
     <Box
@@ -72,46 +36,14 @@ const CheckoutPage = () => {
             Checkout
           </Typography>
         </Box>
-
-        <CheckoutStepper />
-
-        <Box>
-          <SectionTitle variant="h2">Select delivery address</SectionTitle>
-          <Box
-            sx={{ width: 1, display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <Button
-              variant="outlined"
-              startIcon={<AddCircleOutlineIcon />}
-              color="inherit"
-              sx={{
-                width: 1,
-                maxWidth: isBiggerThanMobile ? 250 : "none",
-                paddingY: 1,
-              }}
-              onClick={() => setOpen(true)}
-            >
-              Add new address
-            </Button>
-            {!open ? null : <CheckoutModal {...stateProps} />}
-            {address.map((add) => (
-              <AddressCard addressData={add} {...stateProps} key={add.id} />
-            ))}
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            position: "fixed",
-            left: 0,
-            bottom: 25,
-            width: 1,
-            paddingX: 2,
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
-          {!selected ? null : <Button variant="contained">Next</Button>}
-        </Box>
+        <CheckoutStepper activeStep={activeStep} />
+        {activeStep === 0 ? (
+          <AddressPage {...stepState} />
+        ) : activeStep === 1 ? (
+          <PaymentPage {...stepState} />
+        ) : activeStep === 2 ? (
+          <PlacedOrderPage />
+        ) : null}
       </Box>
     </Box>
   );

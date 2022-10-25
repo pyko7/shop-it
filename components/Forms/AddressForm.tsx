@@ -3,17 +3,17 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import Button from "@mui/material/Button";
-import { ModalStateProps } from "../Modals/CheckoutModal";
+import { ModalStateProps } from "../Modals/AddressModal";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { addressSchema } from "../../utils/validation/formAddress";
+import { addressSchema } from "~/utils/validation/formAddress";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Address } from "../../pages/checkout";
+import { Address } from "~/components/CheckoutPages/AddressPage";
 
 const AddressForm = ({
   setOpen,
-  address,
-  setAddress,
-  setIsSelected,
+  addressList,
+  setAddressList,
+  setSelected,
 }: ModalStateProps) => {
   const handleClose = () => setOpen(false);
   const {
@@ -31,8 +31,8 @@ const AddressForm = ({
 
   const onSubmit: SubmitHandler<Address> = (data: Address) => {
     const randomId = getRandomId();
-    setAddress([...address, { ...data, id: randomId }]);
-    setIsSelected(true);
+    setAddressList([...addressList, { ...data, id: randomId }]);
+    setSelected(data);
     handleClose();
   };
 

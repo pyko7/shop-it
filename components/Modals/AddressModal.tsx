@@ -1,31 +1,31 @@
 import AddressForm from "../Forms/AddressForm";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import { Address } from "../../pages/checkout";
+import { Address } from "../CheckoutPages/AddressPage";
 
 export interface ModalStateProps {
   open?: boolean;
   setOpen: (open: boolean) => void;
-  address: Address[];
-  setAddress: (address: Address[]) => void;
+  addressList: Address[];
+  setAddressList: (addressList: Address[]) => void;
   selected?: Address | null;
-  setIsSelected: (selected: Address | null) => void;
+  setSelected: (selected: Address | null) => void;
 }
 
-const CheckoutModal = ({
+const AddressModal = ({
   open,
   setOpen,
-  address,
-  setAddress,
-  setIsSelected,
+  addressList,
+  setAddressList,
+  setSelected,
 }: ModalStateProps) => {
   const handleClose = () => setOpen(false);
   const stateProps = {
     open,
     setOpen,
-    address,
-    setAddress,
-    setIsSelected,
+    addressList,
+    setAddressList,
+    setSelected,
   };
   return (
     <Dialog
@@ -41,4 +41,4 @@ const CheckoutModal = ({
   );
 };
 
-export default CheckoutModal;
+export default AddressModal;
