@@ -42,6 +42,7 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    localStorage.removeItem("cart");
   };
 
   console.log(creditCardList);
