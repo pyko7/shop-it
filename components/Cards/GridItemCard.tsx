@@ -43,6 +43,7 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
         }}
       >
         <Card
+          component="article"
           sx={{
             position: "relative",
             width: 1,
