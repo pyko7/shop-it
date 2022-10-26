@@ -47,8 +47,10 @@ const AddressCard = ({
 
   const handleDelete = () => {
     setAddressList(
-      addressList.filter((address: Address) => address.id !== address.id)
+      addressList.filter((address: Address) => address.id !== addressData.id)
     );
+    setSelected(null);
+    setSelectedAddress(false);
   };
 
   const AddressCard = styled(Card)(({ theme }) => ({
@@ -93,7 +95,6 @@ const AddressCard = ({
         setSelectedAddress(true);
       } else {
         setIsAddressSelected(false);
-        setSelectedAddress(false);
       }
     };
     handleSelected();

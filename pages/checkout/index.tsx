@@ -7,7 +7,7 @@ import PaymentPage from "~/components/CheckoutPages/PaymentPage";
 import PlacedOrderPage from "~/components/CheckoutPages/PlacedOrderPage";
 
 const CheckoutPage = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const stepState = { activeStep, setActiveStep };
 
   return (
@@ -15,9 +15,8 @@ const CheckoutPage = () => {
       component="section"
       sx={{
         position: "absolute",
-        inset: 0,
-        width: "100%",
-        minHeight: "100vh",
+        top: 0,
+        width: 1,
         padding: 2.5,
         backgroundColor: "neutral.light",
         zIndex: 1101,
@@ -37,13 +36,24 @@ const CheckoutPage = () => {
           </Typography>
         </Box>
         <CheckoutStepper activeStep={activeStep} />
-        {activeStep === 0 ? (
-          <AddressPage {...stepState} />
-        ) : activeStep === 1 ? (
-          <PaymentPage {...stepState} />
-        ) : activeStep === 2 ? (
-          <PlacedOrderPage />
-        ) : null}
+        <Box
+          sx={{
+            position: "absolute",
+            left: 0,
+            width: "100%",
+            minHeight: "100vh",
+            padding: 2.5,
+            backgroundColor: "white",
+          }}
+        >
+          {activeStep === 0 ? (
+            <AddressPage {...stepState} />
+          ) : activeStep === 1 ? (
+            <PaymentPage {...stepState} />
+          ) : activeStep === 2 ? (
+            <PlacedOrderPage />
+          ) : null}
+        </Box>
       </Box>
     </Box>
   );

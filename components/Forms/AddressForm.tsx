@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormGroup from "@mui/material/FormGroup";
 import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
 import { ModalStateProps } from "../Modals/AddressModal";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { addressSchema } from "~/utils/validation/formAddress";
@@ -47,81 +48,139 @@ const AddressForm = ({
     backgroundColor: theme.palette.neutral?.light,
   }));
 
+  const ErrorMessage = styled(FormHelperText)(({ theme }) => ({
+    width: "100%",
+    marginLeft: 2,
+    color: theme.palette.error.main,
+  }));
+
   return (
     <Form component="form" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        type="text"
-        label="Name this address"
-        variant="standard"
-        defaultValue="My address"
-        {...register("addressName")}
-        sx={{ marginBottom: 2 }}
-        helperText={errors.addressName && errors.addressName.message}
-      />
-      <TextField
-        type="text"
-        label="First Name"
-        {...register("firstName")}
-        helperText={errors.firstName && errors.firstName.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="Last Name"
-        {...register("lastName")}
-        helperText={errors.lastName && errors.lastName.message}
-        required
-      />
-      <TextField
-        type="tel"
-        label="Phone number"
-        {...register("phoneNumber")}
-        helperText={errors.phoneNumber && errors.phoneNumber.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="Street Address Line 1"
-        {...register("firstAddressLine")}
-        helperText={errors.firstAddressLine && errors.firstAddressLine.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="Street Address Line 2"
-        {...register("secondAddressLine")}
-        helperText={
-          errors.secondAddressLine && errors.secondAddressLine.message
-        }
-      />
-      <TextField
-        type="text"
-        label="City"
-        {...register("city")}
-        helperText={errors.city && errors.city.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="State / Province"
-        {...register("province")}
-        helperText={errors.province && errors.province.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="Postal / Zip Code"
-        {...register("postalCode")}
-        helperText={errors.postalCode && errors.postalCode.message}
-        required
-      />
-      <TextField
-        type="text"
-        label="Country"
-        {...register("country")}
-        helperText={errors.country && errors.country.message}
-        required
-      />
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Name this address"
+          variant="standard"
+          defaultValue="My address"
+          {...register("addressName")}
+          error={errors.addressName ? true : false}
+          sx={{ marginBottom: 2 }}
+        />
+        <ErrorMessage>
+          {errors.addressName ? errors.addressName.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+
+      <FormGroup>
+        <TextField
+          type="text"
+          label="First Name"
+          {...register("firstName")}
+          error={errors.firstName ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.firstName ? errors.firstName.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Last Name"
+          {...register("lastName")}
+          error={errors.lastName ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.lastName ? errors.lastName.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+      <FormGroup>
+        <TextField
+          type="tel"
+          label="Phone number"
+          {...register("phoneNumber")}
+          error={errors.phoneNumber ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.phoneNumber ? errors.phoneNumber.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Street Address Line 1"
+          {...register("firstAddressLine")}
+          error={errors.firstAddressLine ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.firstAddressLine ? errors.firstAddressLine.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Street Address Line 2"
+          {...register("secondAddressLine")}
+          error={errors.secondAddressLine ? true : false}
+        />
+        <ErrorMessage>
+          {errors.secondAddressLine ? errors.secondAddressLine.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+
+      <FormGroup>
+        <TextField
+          type="text"
+          label="City"
+          {...register("city")}
+          error={errors.city ? true : false}
+          required
+        />
+        <ErrorMessage> {errors.city ? errors.city.message : ""}</ErrorMessage>
+      </FormGroup>
+
+      <FormGroup>
+        <TextField
+          type="text"
+          label="State / Province"
+          {...register("province")}
+          error={errors.province ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.province ? errors.province.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Postal / Zip Code"
+          {...register("postalCode")}
+          error={errors.postalCode ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.postalCode ? errors.postalCode.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+
+      <FormGroup>
+        <TextField
+          type="text"
+          label="Country"
+          {...register("country")}
+          error={errors.country ? true : false}
+          required
+        />
+        <ErrorMessage>
+          {errors.country ? errors.country.message : ""}
+        </ErrorMessage>
+      </FormGroup>
+
       <FormGroup
         sx={{
           width: 1,

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { styled } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
@@ -11,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { CreditCard } from "../CheckoutPages/PaymentPage";
+import paytabsLogo from "~/public/paytabs.png";
 
 interface CreditCardProps {
   creditCardData: CreditCard;
@@ -38,8 +40,10 @@ const CreditCardCard = ({
 
   const handleDelete = () => {
     setCreditCardList(
-      creditCardList.filter((card: CreditCard) => card.id !== card.id)
+      creditCardList.filter((card: CreditCard) => card.id !== creditCardData.id)
     );
+    setSelected(null);
+    setSelectedCreditCard(false);
   };
 
   const CreditCardCard = styled(Card)(({ theme }) => ({
@@ -85,7 +89,6 @@ const CreditCardCard = ({
         setSelectedCreditCard(true);
       } else {
         setIsCreditCardSelected(false);
-        setSelectedCreditCard(false);
       }
     };
     handleSelected();
@@ -130,7 +133,12 @@ const CreditCardCard = ({
           <UserInformation>{creditCardData.cardNumber} </UserInformation>
           <UserInformation>{`Expiry: ${creditCardData.expirationMonth} / ${creditCardData.expirationYear}`}</UserInformation>
 
-          <CardDescription>Secure checkout powered by PayTabs</CardDescription>
+          <CardDescription sx={{ display: "flex" }}>
+            Secure checkout powered by
+            <Box component="span" sx={{ marginX: 1 }}>
+              <Image src={paytabsLogo} width={75} height={25} alt="paytabs" />
+            </Box>
+          </CardDescription>
         </CardContent>
       </CreditCardActionArea>
     </CreditCardCard>

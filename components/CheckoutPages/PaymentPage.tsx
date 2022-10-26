@@ -53,7 +53,7 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
     fontSize: isBiggerThanMobile ? 18 : 16,
   });
   return (
-    <>
+    <Box sx={{ position: "relative", width: 1 }}>
       <Box>
         <SectionTitle variant="h2">Select a payment method</SectionTitle>
         <Box
@@ -78,7 +78,7 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
             sx={{
               width: 1,
               display: "flex",
-              alignItems: "center",
+              alignItems: isBiggerThanMobile ? "flex-start" : "center",
               flexDirection: isBiggerThanTablet ? "row" : "column",
               flexWrap: "wrap",
               gap: 2,
@@ -96,11 +96,11 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
       </Box>
       <Box
         sx={{
-          position: "fixed",
-          left: 0,
-          bottom: 25,
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+          bottom: -65,
           width: 1,
-          paddingX: 2,
           display: "flex",
           justifyContent: "space-between",
         }}
@@ -118,7 +118,7 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
           </Button>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

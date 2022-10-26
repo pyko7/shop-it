@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme, useMediaQuery, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -31,6 +31,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   const [addressList, setAddressList] = useState<Address[]>([]);
   const [selected, setSelected] = useState<Address | null>(null);
   const [selectedAddress, setSelectedAddress] = useState(false);
+  
   const stateProps = {
     open,
     setOpen,
@@ -56,7 +57,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   });
 
   return (
-    <>
+    <Box sx={{ position: "relative", width: 1 }}>
       <Box>
         <SectionTitle variant="h2">Select delivery address</SectionTitle>
         <Box
@@ -81,7 +82,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
             sx={{
               width: 1,
               display: "flex",
-              alignItems: "center",
+              alignItems: isBiggerThanMobile ? "flex-start" : "center",
               flexDirection: isBiggerThanTablet ? "row" : "column",
               flexWrap: "wrap",
               gap: 2,
@@ -95,9 +96,9 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
       </Box>
       <Box
         sx={{
-          position: "fixed",
-          left: 0,
-          bottom: 25,
+          position: "absolute",
+          left: 15,
+          bottom: -65,
           width: 1,
           paddingX: 2,
           display: "flex",
@@ -110,7 +111,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
           </Button>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 
