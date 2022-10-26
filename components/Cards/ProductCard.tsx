@@ -129,12 +129,16 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: 2,
           }}
         >
-          <Typography variant="h1" sx={{ fontSize: 24, fontWeight: 700 }}>
+          <Typography
+            variant="h1"
+            sx={{ width: "85%", fontSize: 24, fontWeight: 700 }}
+          >
             {product.title}
           </Typography>
-          <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+          <Typography sx={{ width: "15%", fontSize: 20, fontWeight: 500 }}>
             ${product.price}
           </Typography>
         </Box>
@@ -143,7 +147,6 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
             marginBottom: 2.5,
             display: "flex",
             flexDirection: "column",
-            gap: 2,
           }}
         >
           <TogglableAccordionPannel label={"Description"} product={product} />

@@ -1,59 +1,72 @@
 import { FC, useState } from "react";
 import { Product } from "~/utils/fetchProducts/getAllProducts";
-import Box from "@mui/material/Box";
+import { styled } from "@mui/material";
+import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
 
-interface AccordionProps {
+interface AccordionItemProps {
   label: string;
   product: Product | null;
 }
 
-const TogglableAccordionPannel: FC<AccordionProps> = ({
+const TogglableAccordionPannel: FC<AccordionItemProps> = ({
   label,
   product,
 }): JSX.Element => {
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [expanded, setExpanded] = useState<string | false>(false);
+  const Accordion = styled((props: AccordionProps) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+  ))(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    "&:not(:last-child)": {
+      borderBottom: 0,
+    },
+    "&:before": {
+      display: "none",
+    },
+  }));
 
-  const handlePannelDisplay = (): void => {
-    return isOpen ? setIsOpen(false) : setIsOpen(true);
-  };
+  const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+  }));
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
 
   return (
-    <Box sx={{ width: 1, borderBottom: "1px solid #afafaf" }}>
-      <Button
-        variant="text"
-        color="inherit"
-        endIcon={isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        sx={{
-          width: 1,
-          paddingX: 0,
-          paddingY: 0.5,
-          display: "flex",
-          justifyContent: "space-between",
-          fontWeight: 500,
-        }}
-        onClick={() => handlePannelDisplay()}
+    <Accordion
+      expanded={expanded === `${label}`}
+      onChange={handleChange(`${label}`)}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls={label}
+        id={label}
       >
-        {label}
-      </Button>
-      {!isOpen ? null : (
-        <Box sx={{ width: 1, marginTop: 2 }}>
-          <Typography paragraph sx={{ fontSize: 14 }}>
-            {product?.description}
-          </Typography>
-        </Box>
-      )}
-      {isOpen && label.includes("reviews") ? (
-        <Box sx={{ width: 1, marginTop: 2 }}>
+        <Typography>{label}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        {label.includes("reviews") ? (
           <Typography paragraph sx={{ fontSize: 14 }}>
             There aren&apos;t reviews for this product yet
           </Typography>
-        </Box>
-      ) : null}
-    </Box>
+        ) : label.includes("Free") ? (
+          <Typography paragraph sx={{ fontSize: 14 }}>
+            It's free, enjoy it !
+          </Typography>
+        ) : (
+          <Typography paragraph sx={{ fontSize: 14 }}>
+            {product?.description}
+          </Typography>
+        )}
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
