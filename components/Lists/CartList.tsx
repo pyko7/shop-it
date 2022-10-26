@@ -126,6 +126,7 @@ const CartList: FC = (): JSX.Element => {
                     key={product.data?.id}
                   />
                 ))}
+
                 {cartTotalQuantity >= 1 ? null : (
                   <Box sx={{ width: 1, marginY: 2, textAlign: "center" }}>
                     <ShoppingCartIcon
@@ -146,40 +147,43 @@ const CartList: FC = (): JSX.Element => {
             </Grid>
           )}
         </>
-        <Box
-          sx={{
-            width: 1,
-            height: "fit-content",
-            marginY: 2,
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box sx={{ paddingX: 2 }}>
-            <Typography
-              sx={{
-                fontSize: 16,
-              }}
-            >
-              Total price
-            </Typography>
-            <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-              $ {totalPrice}
-            </Typography>
-          </Box>
-
-          <Button
-            href="/checkout"
-            variant="contained"
-            size={isBiggerThanMobile ? "medium" : "small"}
+        {cartTotalQuantity < 1 ? null : (
+          <Box
             sx={{
-              width: "50%",
-              maxWidth: isBiggerThanMobile ? 250 : 450,
+              width: 1,
+              height: "fit-content",
+              marginY: 2,
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            Checkout
-          </Button>
-        </Box>
+            <Box sx={{ paddingX: 2 }}>
+              <Typography
+                sx={{
+                  fontSize: 16,
+                }}
+              >
+                Total price
+              </Typography>
+              <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                $ {totalPrice}
+              </Typography>
+            </Box>
+
+            <Button
+              href="/checkout"
+              variant="contained"
+              size={isBiggerThanMobile ? "medium" : "small"}
+              sx={{
+                width: "50%",
+                maxWidth: isBiggerThanMobile ? 250 : 450,
+              }}
+              disabled={cartTotalQuantity < 1 ? true : false}
+            >
+              Checkout
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   );

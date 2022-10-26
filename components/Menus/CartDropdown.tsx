@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useCartContext } from "~/context/CartContext";
 import CartDropDownButton from "../Buttons/CartDropDownButton";
@@ -107,16 +108,23 @@ const CartDropdown = () => {
         ) : error ? (
           <ErrorMessage />
         ) : (
-          <Box>
-            {userQueries.map((product) => {
-              return (
+          <Grid container>
+            <Grid
+              item
+              sx={{
+                width: 1,
+                display: "block",
+                justifyContent: "center",
+              }}
+            >
+              {userQueries.map((product) => (
                 <DropdownMenuCard
                   product={product.data!}
                   key={product.data?.id}
                 />
-              );
-            })}
-          </Box>
+              ))}
+            </Grid>
+          </Grid>
         )}
       </>
       <Box

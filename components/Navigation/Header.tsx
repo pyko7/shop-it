@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Searchbar from "./Searchbar";
 import { styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -12,10 +13,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useCartContext } from "~/context/CartContext";
 import HeaderCartDropdown from "../Menus/HeaderCartDropdown";
 
 const Header = () => {
+  const router = useRouter();
+  const pathname = router.pathname;
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
@@ -51,21 +55,27 @@ const Header = () => {
           boxShadow: 0,
         }}
       >
-        <Link href="/">
-          <a
-            style={{
-              width: "fit-content",
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <Typography
-              sx={{ fontSize: isBiggerThanMobile ? 24 : 20, fontWeight: 500 }}
+        {isBiggerThanMobile || pathname === "/" ? (
+          <Link href="/">
+            <a
+              style={{
+                width: "fit-content",
+                textDecoration: "none",
+                color: "inherit",
+              }}
             >
-              Shop-it!
-            </Typography>
-          </a>
-        </Link>
+              <Typography
+                sx={{ fontSize: isBiggerThanMobile ? 24 : 20, fontWeight: 500 }}
+              >
+                Shop-it!
+              </Typography>
+            </a>
+          </Link>
+        ) : (
+          <IconButton sx={{ padding: 0 }} onClick={() => router.back()}>
+            <ArrowBackIcon sx={{ fontSize: 30 }} />
+          </IconButton>
+        )}
 
         <Box
           sx={{

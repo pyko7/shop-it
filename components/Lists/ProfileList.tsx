@@ -42,7 +42,7 @@ const ProfileList = () => {
       <ListItem disablePadding>
         <ListButton divider>
           <ListItemIcon>
-            <ShoppingCartCheckoutIcon />
+            <ShoppingCartCheckoutIcon sx={{ transform: "scale(-1, 1)" }} />
           </ListItemIcon>
           <ListItemText primary="My returns" />
           <ChevronRightIcon />

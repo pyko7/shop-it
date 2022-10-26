@@ -1,32 +1,23 @@
-import Link from "next/link";
 import { styled } from "@mui/material";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { useCartContext } from "~/context/CartContext";
 
 const CartDropDownButton = () => {
-  const ModalButtonColored = styled("a")(({ theme }) => ({
+  const { cartTotalQuantity } = useCartContext();
+
+  const ModalButtonColored = styled(Button)(({ theme }) => ({
     width: "100%",
-    padding: 10,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4,
     backgroundColor: theme.palette.primary.main,
-    textTransform: "uppercase",
-    textDecoration: "none",
-    cursor: "pointer",
+    color: theme.palette.neutral?.dark,
+    "&.Mui-disabled": {
+      backgroundColor: theme.palette.neutral?.main,
+    },
   }));
-  const ModalButtonNeutral = styled("a")(({ theme }) => ({
+  const ModalButtonNeutral = styled(Button)(({ theme }) => ({
     width: "100%",
-    padding: 10,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4,
     border: `1px solid ${theme.palette.neutral?.dark}`,
-    backgroundColor: theme.palette.neutral?.light,
-    textTransform: "uppercase",
-    textDecoration: "none",
-    cursor: "pointer",
+    color: theme.palette.neutral?.dark,
   }));
 
   return (
@@ -39,12 +30,14 @@ const CartDropDownButton = () => {
         gap: 2.5,
       }}
     >
-      <Link href="/cart">
-        <ModalButtonNeutral>View bag</ModalButtonNeutral>
-      </Link>
-      <Link href="/checkout">
-        <ModalButtonColored>Payment</ModalButtonColored>
-      </Link>
+      <ModalButtonNeutral href="/cart">View bag</ModalButtonNeutral>
+
+      <ModalButtonColored
+        href="/checkout"
+        disabled={cartTotalQuantity < 1 ? true : false}
+      >
+        Payment
+      </ModalButtonColored>
     </Box>
   );
 };

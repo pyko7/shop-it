@@ -3,6 +3,7 @@ import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Zoom from "@mui/material/Zoom";
 import GridItemCard from "../Cards/GridItemCard";
 import { useQueries } from "@tanstack/react-query";
 import { getProductById } from "~/utils/fetchProducts/getProductsById";
