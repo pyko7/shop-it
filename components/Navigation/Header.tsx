@@ -12,7 +12,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import HeaderCartDropdown from "../Menus/HeaderCartDropdown";
 
 const Header = () => {

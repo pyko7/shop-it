@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Popover from "@mui/material/Popover";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import CartDropdown from "./CartDropdown";
 import { useEffect } from "react";
 

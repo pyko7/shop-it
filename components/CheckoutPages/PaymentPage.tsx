@@ -45,8 +45,6 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
     localStorage.removeItem("cart");
   };
 
-  console.log(creditCardList);
-
   const SectionTitle = styled(Typography)({
     margin: "20px 0",
     fontWeight: 500,

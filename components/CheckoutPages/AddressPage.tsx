@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme, useMediaQuery, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -31,7 +31,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   const [addressList, setAddressList] = useState<Address[]>([]);
   const [selected, setSelected] = useState<Address | null>(null);
   const [selectedAddress, setSelectedAddress] = useState(false);
-  
+
   const stateProps = {
     open,
     setOpen,

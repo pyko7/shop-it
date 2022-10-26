@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
+import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
 import { StateProps } from "../Cards/ProductCard";
 import { useTheme } from "@mui/material";
 import IconButton from "@mui/material/IconButton";

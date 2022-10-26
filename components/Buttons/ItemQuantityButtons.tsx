@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 
 type productIdProps = {
   productId: number;

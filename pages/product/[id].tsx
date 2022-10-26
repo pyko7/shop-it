@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
-import useProductByIdData from "../../hooks/useProductByIdData";
-import ProductCard from "../../components/Cards/ProductCard";
-import LoadingSpinner from "../../components/UserFeedback/LoadingSpinner";
-import ErrorMessage from "../../components/UserFeedback/ErrorMessage";
+import useProductByIdData from "~/hooks/useProductByIdData";
+import ProductCard from "~/components/Cards/ProductCard";
+import LoadingSpinner from "~/components/UserFeedback/LoadingSpinner";
+import ErrorMessage from "~/components/UserFeedback/ErrorMessage";
 
 const ItemPage: NextPage = () => {
   const router = useRouter();

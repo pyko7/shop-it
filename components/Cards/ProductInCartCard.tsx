@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 import ItemQuantityButtons from "../Buttons/ItemQuantityButtons";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import { ProductProps } from "./NewArrivalItem";
 import { useTheme } from "@mui/material";
 

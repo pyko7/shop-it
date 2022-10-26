@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
+import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import GridItemCard from "../Cards/GridItemCard";
 import { useQueries } from "@tanstack/react-query";
-import { getProductById } from "../../utils/fetchProducts/getProductsById";
+import { getProductById } from "~/utils/fetchProducts/getProductsById";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { ProductProps } from "./NewArrivalItem";
 import Image from "next/image";
-import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
+import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Icon from "@mui/material/Icon";

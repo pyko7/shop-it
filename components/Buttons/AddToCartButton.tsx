@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import Button from "@mui/material/Button";
 import { useMediaQuery, useTheme } from "@mui/material";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 interface AddToCartButtonProps {
@@ -11,12 +11,8 @@ interface AddToCartButtonProps {
 const AddToCartButton: FC<AddToCartButtonProps> = ({
   productId,
 }): JSX.Element => {
-  const {
-    increaseQuantity,
-    cartTotalQuantity,
-    setCartTotalQuantity,
-    setAnchorEl,
-  } = useCartContext();
+  const { increaseQuantity, cartTotalQuantity, setCartTotalQuantity } =
+    useCartContext();
   const [isAdded, setIsAdded] = useState(false);
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));

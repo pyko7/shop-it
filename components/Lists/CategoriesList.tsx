@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { StateProps } from "../../context/CategoryContext";
+import { StateProps } from "~/context/CategoryContext";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import useAllProductsData from "../../hooks/useAllProductsData";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
+import useAllProductsData from "~/hooks/useAllProductsData";
+import { Product } from "~/utils/fetchProducts/getAllProducts";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

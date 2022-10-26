@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import CartDropDownButton from "../Buttons/CartDropDownButton";
 import DropdownMenuCard from "../Cards/DropdownMenuCard";
 import { useQueries } from "@tanstack/react-query";
-import { getProductById } from "../../utils/fetchProducts/getProductsById";
+import { getProductById } from "~/utils/fetchProducts/getProductsById";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

@@ -7,9 +7,9 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import {
   getAllProducts,
   Product,
-} from "../../utils/fetchProducts/getAllProducts";
+} from "~/utils/fetchProducts/getAllProducts";
 import NewArrivalItem from "../Cards/NewArrivalItem";
-import useAllProductsData from "../../hooks/useAllProductsData";
+import useAllProductsData from "~/hooks/useAllProductsData";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

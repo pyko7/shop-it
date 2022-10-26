@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
+import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
+import { Product } from "~/utils/fetchProducts/getAllProducts";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Searchbar from "../../components/Navigation/Searchbar";
+import Searchbar from "~/components/Navigation/Searchbar";
 
 const Search: NextPage = () => {
   const theme = useTheme();

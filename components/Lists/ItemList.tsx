@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { StateProps } from "../../context/CategoryContext";
+import { StateProps } from "~/context/CategoryContext";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -7,9 +7,9 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import {
   getAllProducts,
   Product,
-} from "../../utils/fetchProducts/getAllProducts";
+} from "~/utils/fetchProducts/getAllProducts";
 import GridItemCard from "../Cards/GridItemCard";
-import { useDisplayProductsByCategory } from "../../hooks/useDisplayProductsByCategory";
+import { useDisplayProductsByCategory } from "~/hooks/useDisplayProductsByCategory";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

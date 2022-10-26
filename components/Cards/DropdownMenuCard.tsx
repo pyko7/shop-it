@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ProductProps } from "./NewArrivalItem";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 
 const DropdownMenuCard: FC<ProductProps> = ({ product }) => {
   const theme = useTheme();

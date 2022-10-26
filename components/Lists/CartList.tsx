@@ -1,14 +1,14 @@
 import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
-import { useCartContext } from "../../context/CartContext";
+import { useCartContext } from "~/context/CartContext";
 import ProductInCartCard from "../Cards/ProductInCartCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useQueries } from "@tanstack/react-query";
-import { getProductById } from "../../utils/fetchProducts/getProductsById";
+import { getProductById } from "~/utils/fetchProducts/getProductsById";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
 import ErrorMessage from "../UserFeedback/ErrorMessage";
 

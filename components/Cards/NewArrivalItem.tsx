@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from "react";
-import { useFavoriteProductsList } from "../../context/FavoriteProductsContext";
+import { useFavoriteProductsList } from "~/context/FavoriteProductsContext";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
+import { Product } from "~/utils/fetchProducts/getAllProducts";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

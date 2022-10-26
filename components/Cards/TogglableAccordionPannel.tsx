@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Product } from "../../utils/fetchProducts/getAllProducts";
+import { Product } from "~/utils/fetchProducts/getAllProducts";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
