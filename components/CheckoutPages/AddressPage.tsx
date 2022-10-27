@@ -32,6 +32,10 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   const [selected, setSelected] = useState<Address | null>(null);
   const [selectedAddress, setSelectedAddress] = useState(false);
 
+  const theme = useTheme();
+  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
+  const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
+
   const stateProps = {
     open,
     setOpen,
@@ -42,9 +46,6 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
     selectedAddress,
     setSelectedAddress,
   };
-  const theme = useTheme();
-  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-  const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

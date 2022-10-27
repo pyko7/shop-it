@@ -25,11 +25,15 @@ const CartList: FC = (): JSX.Element => {
 
   let productPrice: number[] = [];
 
+  /** @return -  An array of query results */
   const userQueries = useQueries({
     queries: cart.map((product) => {
       return {
+        /**The query key to use for this query */
         queryKey: ["product", product.id],
+        /**The function that the query will use to request data. */
         queryFn: () => getProductById(product.id),
+        /**The time in milliseconds after data is considered stale. Infinity = data will never be considered stale */
         staleTime: Infinity,
       };
     }),

@@ -7,14 +7,23 @@ type CartItem = {
 };
 
 interface CartContext {
+  /** Total quantity of the cart*/
   cartTotalQuantity: number;
+  /** A callback that set the total quantity of the cart*/
   setCartTotalQuantity: (cartTotalQuantity: number) => void;
+  /** HTML Element used to set the position of the popover   */
   anchorEl: HTMLButtonElement | null;
+  /** Function used to set the position of the popover */
   setAnchorEl: (anchorEl: HTMLButtonElement | null) => void;
+  /** Function used to get the cart */
   getCart: () => [] | CartItem[];
+  /** Function used to get the quantity of items in the cart */
   getCartQuantity: () => number;
+  /** Function used to get the quantity of 1 item in the cart */
   getProductQuantity: (id: number) => number | undefined;
+  /** Function that increase the quantity by 1 of an item */
   increaseQuantity: (id: number) => void;
+  /** Function that decrease the quantity by 1 of an item */
   decreaseQuantity: (id: number) => void;
   removeProductFromCart: (id: number) => void;
 }

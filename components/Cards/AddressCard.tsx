@@ -11,14 +11,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import HomeIcon from "@mui/icons-material/Home";
 import { Address } from "~/components/CheckoutPages/AddressPage";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { ModalStateProps } from "../Modals/AddressModal";
 
-interface AddressProps {
+interface AddressProps extends ModalStateProps {
+  /** data that will be displayed in cards   */
   addressData: Address;
   addressList: Address[];
   setAddressList: (addressList: Address[]) => void;
   selected: Address | null;
   setSelected: (selected: Address | null) => void;
+  /** state used to display "next" button
+   * if true the button is visible
+   */
   selectedAddress: boolean;
+  /** A callback that handles the state of "next" button */
   setSelectedAddress: (selectedAddress: boolean) => void;
 }
 

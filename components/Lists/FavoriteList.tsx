@@ -15,15 +15,20 @@ const FavoriteList: FC = (): JSX.Element => {
   const theme = useTheme();
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
+  /** @return -  An array of query results */
   const userQueries = useQueries({
     queries: state.idList.map((id) => {
       return {
+        /**The query key to use for this query */
         queryKey: ["product", id],
+        /**The function that the query will use to request data. */
         queryFn: () => getProductById(id),
+        /**The time in milliseconds after data is considered stale. Infinity = data will never be considered stale */
         staleTime: Infinity,
       };
     }),
   });
+
   const isLoading = userQueries.some((userQuery) => userQuery.isLoading);
   const error = userQueries.some((userQuery) => userQuery.error);
 

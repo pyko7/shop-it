@@ -4,8 +4,15 @@ import favoriteReducer, { ListOfId } from "../reducers/favoriteReducer";
 type FavoriteProductListProps = { children: ReactNode };
 
 interface FavoriteProductsListContext {
+  /**
+   * Function that handle if a item is set in favorite list or not
+   */
   handleFavorite: (event: any, id: number) => void;
+  /**
+   * Function that handle the style of the heart icon
+   */
   handleFavoriteIcon: (id: number) => boolean;
+  /** List of items' id set in favorites */
   state: ListOfId;
 }
 

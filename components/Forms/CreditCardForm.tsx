@@ -52,6 +52,10 @@ const CreditCardForm = ({
     return Math.floor(Math.random() * 10);
   };
 
+  /**
+   * This function create the address object
+   * @param data - data entered by the user in the form
+   */
   const onSubmit: SubmitHandler<CreditCard> = (data: CreditCard) => {
     const randomId = getRandomId();
     if (parseInt(year) === currentYear && parseInt(month) < currentMonth) {

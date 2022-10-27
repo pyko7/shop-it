@@ -36,7 +36,6 @@ const ItemQuantityButtons = ({
   const increaseProductQuantity = () => {
     if (typeof quantity === "number") {
       increaseQuantity(productId);
-
       setQuantity(quantity + 1);
       setCartTotalQuantity(cartTotalQuantity + 1);
     }

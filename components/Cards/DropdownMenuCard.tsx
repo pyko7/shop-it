@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, useState } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "@mui/material";

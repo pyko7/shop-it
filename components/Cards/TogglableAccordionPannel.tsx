@@ -58,7 +58,7 @@ const TogglableAccordionPannel: FC<AccordionItemProps> = ({
           </Typography>
         ) : label.includes("Free") ? (
           <Typography paragraph sx={{ fontSize: 14 }}>
-            It's free, enjoy it !
+            It&apos;s free, enjoy it !
           </Typography>
         ) : (
           <Typography paragraph sx={{ fontSize: 14 }}>

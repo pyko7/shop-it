@@ -4,10 +4,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import {
-  getAllProducts,
-  Product,
-} from "~/utils/fetchProducts/getAllProducts";
+import { getAllProducts, Product } from "~/utils/fetchProducts/getAllProducts";
 import NewArrivalItem from "../Cards/NewArrivalItem";
 import useAllProductsData from "~/hooks/useAllProductsData";
 import LoadingSpinner from "../UserFeedback/LoadingSpinner";
@@ -78,7 +75,7 @@ const NewArrivalList: FC = (): JSX.Element => {
               rowSpacing={1.5}
               columnSpacing={{ xs: 1, md: 3, xl: 1 }}
             >
-              {products.map((product) => (
+              {products.slice(0, 4).map((product) => (
                 <Grid
                   item
                   xs={6}

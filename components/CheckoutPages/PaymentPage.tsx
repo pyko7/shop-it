@@ -22,6 +22,11 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);
   const [selected, setSelected] = useState<CreditCard | null>(null);
   const [selectedCreditCard, setSelectedCreditCard] = useState(false);
+
+  const theme = useTheme();
+  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
+  const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
+
   const stateProps = {
     open,
     setOpen,
@@ -32,9 +37,6 @@ const PaymentPage = ({ activeStep, setActiveStep }: StepStateProps) => {
     selectedCreditCard,
     setSelectedCreditCard,
   };
-  const theme = useTheme();
-  const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
-  const isBiggerThanTablet = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);

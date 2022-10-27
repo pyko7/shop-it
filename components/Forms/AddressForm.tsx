@@ -14,7 +14,6 @@ const AddressForm = ({
   setOpen,
   addressList,
   setAddressList,
-  setSelected,
 }: ModalStateProps) => {
   const handleClose = () => setOpen(false);
   const {
@@ -26,14 +25,17 @@ const AddressForm = ({
     reValidateMode: "onSubmit",
   });
 
-  const getRandomId = () => {
+  const getRandomId = (): number => {
     return Math.floor(Math.random() * 10);
   };
 
+  /**
+   * This function create the address object
+   * @param data - data entered by the user in the form
+   */
   const onSubmit: SubmitHandler<Address> = (data: Address) => {
     const randomId = getRandomId();
     setAddressList([...addressList, { ...data, id: randomId }]);
-    setSelected(data);
     handleClose();
   };
 

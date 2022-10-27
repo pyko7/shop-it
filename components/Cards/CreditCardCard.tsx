@@ -13,14 +13,20 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { CreditCard } from "../CheckoutPages/PaymentPage";
 import paytabsLogo from "~/public/paytabs.png";
+import { ModalStateProps } from "../Modals/PaymentModal";
 
-interface CreditCardProps {
+interface CreditCardProps extends ModalStateProps {
+  /** data that will be displayed in cards   */
   creditCardData: CreditCard;
   creditCardList: CreditCard[];
   setCreditCardList: (creditCardList: CreditCard[]) => void;
   selected: CreditCard | null;
   setSelected: (selected: CreditCard | null) => void;
+  /** state used to display "next" button
+   * if true the button is visible
+   */
   selectedCreditCard: boolean;
+  /** A callback that handles the state of "next" button */
   setSelectedCreditCard: (selectedCreditCard: boolean) => void;
 }
 
