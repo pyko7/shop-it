@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
@@ -15,6 +16,12 @@ const Cart: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Cart | Shop-it!</title>
+        <meta name="description" content="See what's in your cart" />
+        {/* Open Graph */}
+        <meta property="og:description" content="See what's in your cart" />
+      </Head>
       <Box
         component="section"
         sx={{

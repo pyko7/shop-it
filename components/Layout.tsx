@@ -14,7 +14,7 @@ const Layout = ({ children }: { children?: ReactNode }) => {
           content="On Shop-it! you can find everything you want"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Shop-it!" />
@@ -33,7 +33,7 @@ const Layout = ({ children }: { children?: ReactNode }) => {
           minHeight: "100vh",
           marginY: 0,
           marginX: "auto",
-          paddingY: .5,
+          paddingY: 0.5,
           backgroundColor: "neutral.main",
         }}
       >

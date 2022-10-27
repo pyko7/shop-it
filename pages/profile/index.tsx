@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
@@ -12,6 +13,13 @@ const ProfilePage = () => {
 
   return (
     <>
+      <Head>
+        <title>Profile | Shop-it!</title>
+        <meta name="description" content="Handle your profile " />
+        {/* Open Graph */}
+        <meta property="og:title" content="Profile | Shop-it!" />
+        <meta property="og:description" content="Handle your profile " />
+      </Head>
       <Box
         component="section"
         sx={{
