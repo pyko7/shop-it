@@ -14,7 +14,8 @@ const Layout = ({ children }: { children?: ReactNode }) => {
           content="On Shop-it! you can find everything you want"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Shop-it!" />
