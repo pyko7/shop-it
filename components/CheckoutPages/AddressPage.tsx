@@ -58,7 +58,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
   });
 
   return (
-    <Box sx={{ position: "relative", width: 1 }}>
+    <Box sx={{ position: "relative", width: 1, maxWidth: 800, margin:"0 auto" }}>
       <Box>
         <SectionTitle variant="h2">Select delivery address</SectionTitle>
         <Box
@@ -70,7 +70,7 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
             color="inherit"
             sx={{
               width: 1,
-              maxWidth: isBiggerThanMobile ? 250 : "none",
+              maxWidth: 250,
               paddingY: 1,
             }}
             onClick={() => setOpen(true)}
@@ -83,7 +83,6 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
             sx={{
               width: 1,
               display: "flex",
-              alignItems: isBiggerThanMobile ? "flex-start" : "center",
               flexDirection: isBiggerThanTablet ? "row" : "column",
               flexWrap: "wrap",
               gap: 2,
@@ -97,17 +96,22 @@ const AddressPage = ({ activeStep, setActiveStep }: StepStateProps) => {
       </Box>
       <Box
         sx={{
-          position: "absolute",
-          left: 15,
-          bottom: -65,
+          position: "relative",
           width: 1,
-          paddingX: 2,
-          display: "flex",
-          justifyContent: "flex-end",
+          marginY: 4,
+          marginX: "auto",
         }}
       >
         {!selectedAddress ? null : (
-          <Button variant="contained" onClick={() => handleNext()}>
+          <Button
+            variant="contained"
+            sx={{
+              position: "absolute",
+              right: 0,
+              top: 15,
+            }}
+            onClick={() => handleNext()}
+          >
             Next
           </Button>
         )}

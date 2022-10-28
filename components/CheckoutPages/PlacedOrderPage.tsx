@@ -42,7 +42,12 @@ const PlacedOrderPage = () => {
           justifyContent: "flex-end",
         }}
       >
-        <Button href="/" variant="contained" fullWidth>
+        <Button
+          href="/"
+          variant="contained"
+          fullWidth
+          sx={{ height: 55, maxWidth: 350, margin: "0 auto" }}
+        >
           Continue shopping
         </Button>
       </Box>
