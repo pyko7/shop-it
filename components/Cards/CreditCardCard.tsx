@@ -98,7 +98,7 @@ const CreditCardCard = ({
       }
     };
     handleSelected();
-  }, [selected]);
+  });
 
   return (
     <CreditCardCard>

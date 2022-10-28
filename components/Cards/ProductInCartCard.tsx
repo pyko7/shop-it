@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Box from "@mui/material/Box";
@@ -22,13 +22,13 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
   const [quantity, setQuantity] = useState(getProductQuantity(product.id));
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleDisplay = () => {
+  const handleDisplay = useCallback(() => {
     if (typeof quantity === "number" && quantity < 1) {
       setIsVisible(false);
     } else {
       setIsVisible(true);
     }
-  };
+  }, [quantity]);
 
   const removeProduct = () => {
     setIsVisible(false);
@@ -41,7 +41,7 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
 
   useEffect(() => {
     handleDisplay();
-  }, [quantity]);
+  }, [handleDisplay]);
 
   return (
     <Slide

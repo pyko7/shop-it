@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { styled } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -16,8 +16,6 @@ const CartDropdown = () => {
   const cart = getCart();
   const [totalPrice, setTotalPrice] = useState(0);
 
-  let productPrice: number[] = [];
-
   const userQueries = useQueries({
     queries: cart.map((product) => {
       return {
@@ -31,7 +29,9 @@ const CartDropdown = () => {
   const isLoading = userQueries.some((userQuery) => userQuery.isLoading);
   const error = userQueries.some((userQuery) => userQuery.error);
 
-  const getProductPrices = () => {
+  const getProductPrices = useCallback(() => {
+    let productPrice: number[] = [];
+
     userQueries.forEach((product) => {
       cart.map((item) => {
         if (product.data?.id === item.id) {
@@ -45,11 +45,11 @@ const CartDropdown = () => {
         0
       )
     );
-  };
+  }, [cart, userQueries]);
 
   useEffect(() => {
     getProductPrices();
-  }, [cart]);
+  }, [getProductPrices]);
 
   const Dropdown = styled(Box)({
     position: "relative",

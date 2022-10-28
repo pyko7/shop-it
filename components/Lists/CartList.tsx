@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import { useCartContext } from "~/context/CartContext";
@@ -23,8 +23,6 @@ const CartList: FC = (): JSX.Element => {
   const isBiggerThanMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const isLaptop = useMediaQuery(theme.breakpoints.between("sm", "lg"));
 
-  let productPrice: number[] = [];
-
   /** @return -  An array of query results */
   const userQueries = useQueries({
     queries: cart.map((product) => {
@@ -42,7 +40,9 @@ const CartList: FC = (): JSX.Element => {
   const isLoading = userQueries.some((userQuery) => userQuery.isLoading);
   const error = userQueries.some((userQuery) => userQuery.error);
 
-  const getProductPrices = () => {
+  const getProductPrices = useCallback(() => {
+    let productPrice: number[] = [];
+
     userQueries.forEach((product) => {
       cart.map((item) => {
         if (product.data?.id === item.id) {
@@ -56,11 +56,11 @@ const CartList: FC = (): JSX.Element => {
         0
       )
     );
-  };
+  }, [cart, userQueries]);
 
   useEffect(() => {
     getProductPrices();
-  }, [cart]);
+  }, [getProductPrices]);
 
   return (
     <Box

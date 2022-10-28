@@ -104,7 +104,7 @@ const AddressCard = ({
       }
     };
     handleSelected();
-  }, [selected]);
+  });
 
   return (
     <AddressCard>

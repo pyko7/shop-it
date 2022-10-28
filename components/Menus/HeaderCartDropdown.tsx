@@ -26,7 +26,7 @@ const HeaderCartDropdown = () => {
     if (pathname === "/cart" || pathname === "/payment") {
       setAnchorEl(null);
     }
-  }, [pathname]);
+  });
 
   const open = Boolean(anchorEl);
 
