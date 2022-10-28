@@ -32,13 +32,14 @@ const Home: NextPage = () => {
       >
         <NewArrivalList />
       </Box>
-      {/*New arrival section*/}
+
       <CategoryContext.Provider value={{ category, setCategory }}>
         <Box
           component="section"
           sx={{
             width: "100%",
-            paddingTop: isBiggerThanTablet ? 1.5 : 0,
+            maxWidth: 1500,
+            margin: "0 auto",
             gap: 2.5,
           }}
         >
