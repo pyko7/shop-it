@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shop-it
 
-## Getting Started
+Shop-it is a fake e-commerce website where you can find all sorts of products.
 
-First, run the development server:
+It is built with NextJS and it uses Typescript along with MUI, React Query and the [API DummyJSON](https://dummyjson.com/).
+This project is my introduction to Typescript as well as a React component library, in this case, MUI.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+To make this website the most realistic, I've used localStorage to store the the products put in favorites by the user just like the cart. To keep data safe from user updates, I've decided to only store ID's of product then fetch it from thanks to the ID.
+Then, to access the favorite list or the cart I use react hooks, useContext and useReducer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+There are 2 things present in the project that aren't working and that I won't implement (or not for the moment). I'm talking about the search page/ search function and profile page. The rest of the application is supposed to work ()
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Tech Stack
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [NextJS](https://nextjs.org/) 
+- [MUI](https://mui.com/)
+- [React Query](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Yup](https://github.com/jquense/yup)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Thanks to the youtube channel Web Dev Simplified and this [video](https://youtu.be/lATafp15HWA) helped me to keep the context in only one file.
+- [typescripttutorial](https://www.typescripttutorial.net/)'s website also helped me a lot.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🖖 About Me
+I'm Julien, a front end developer based in France 🇫🇷. I'm currently looking for my first professional experience as a front end developer in remote.
+You'll find all my links below
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://julienhenry.fr/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/julienhenry9671/)
+
