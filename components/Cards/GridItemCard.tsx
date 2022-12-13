@@ -67,6 +67,8 @@ const ItemCard: FC<ProductProps> = ({ product }): JSX.Element => {
             >
               <Box sx={{ position: "relative", width: 1, height: "60%" }}>
                 <Image
+                  loader={() => product?.thumbnail!}
+                  unoptimized={true}
                   src={product?.thumbnail!}
                   alt={product?.title}
                   layout="fill"

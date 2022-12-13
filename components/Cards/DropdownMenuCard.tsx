@@ -66,6 +66,8 @@ const DropdownMenuCard: FC<ProductProps> = ({ product }) => {
           >
             <a>
               <Image
+                loader={() => product?.thumbnail!}
+                unoptimized={true}
                 src={product?.thumbnail!}
                 alt={product?.title}
                 layout="fixed"

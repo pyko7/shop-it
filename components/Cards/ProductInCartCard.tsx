@@ -83,6 +83,8 @@ const ProductInCartCard: FC<ProductProps> = ({ product }): JSX.Element => {
           >
             <a>
               <Image
+                loader={() => product?.thumbnail!}
+                unoptimized={true}
                 src={product?.thumbnail!}
                 alt={product?.title}
                 layout="fixed"

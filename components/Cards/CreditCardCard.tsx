@@ -142,7 +142,14 @@ const CreditCardCard = ({
           <CardDescription sx={{ display: "flex" }}>
             Secure checkout powered by
             <Box component="span" sx={{ marginX: 1 }}>
-              <Image src={paytabsLogo} width={75} height={25} alt="paytabs" />
+              <Image
+                loader={() => `${paytabsLogo}`}
+                unoptimized={true}
+                src={paytabsLogo}
+                width={75}
+                height={25}
+                alt="paytabs"
+              />
             </Box>
           </CardDescription>
         </CardContent>

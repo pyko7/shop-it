@@ -77,6 +77,8 @@ const ProductCard: FC<ProductProps> = ({ product }): JSX.Element => {
             key={product}
           >
             <Image
+              loader={() => product}
+              unoptimized={true}
               src={product}
               alt="product visual"
               layout="fill"
